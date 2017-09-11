@@ -1,0 +1,1244 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>hebrewCorpus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link href="instructionstyles.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        function check() {
+            var error = "false";
+            if (document.searchForm.word.value == "" && document.searchForm.wordAR.value == "") {
+                document.getElementById("searchError1").innerHTML = "search for a word";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.word.value != "" && document.searchForm.wordAR.value != "") {
+                document.getElementById("searchError1").innerHTML = "search for word in ht or arabic";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.pos.value == "---") {
+                document.getElementById("searchError1").innerHTML = "choose pos";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.corpus.value == "") {
+                document.getElementById("searchError1").innerHTML = "choose corpus";
+                return false;
+            }
+            ;
+
+        };
+
+
+        var numHolder = 0;
+
+        function showIns(divId) {
+
+            if (document.getElementById(divId).style.display == "none" || document.getElementById(divId).style.display == false) {
+                //if (numHolder > 1){
+                document.getElementById(divId).style.display = "block";
+                numHolder = 0;
+            } else {
+                document.getElementById(divId).style.display = "none";
+                numHolder = 2;
+            }
+            ;
+
+        };
+
+    </script>
+
+</head>
+
+<body>
+<div>
+    <table class="topBar" cellspacing="0px">
+        <tr>
+            <td>
+                <div class="search">
+
+                    <form name="searchForm" action="search.cgi" method="POST" onSubmit="return check()">
+                        <table class="table2" cellspacing="0px">
+                            <tr>
+                                <td>latin chars &nbsp;&nbsp;<a
+                                        onClick="javascript:window.open('dt.html','window','scrollbars,resizable,dependent,width=400,height=400,left=0,top=0')">(transliteration
+                                    help)</a></td>
+                                <td>hebrew chars</td>
+                                <td>part of speech</td>
+                                <td>subcorpus</td>
+
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><input class="dt" type="TEXT" name="word"></td>
+                                <td rowspan="2"><input class="arabic" type="TEXT" name="wordAR" lang=he size=12></td>
+                                <td>
+                                    <select name="pos">
+                                        <option>---</option>
+                                        <option>noun</option>
+                                        <option>adj</option>
+                                        <option>adv</option>
+                                        <option selected="selected">verb</option>
+                                        <option>string</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="corpus">
+                                        <option value="">---</option>
+                                        <option value='ARUTZ'>Arutz 7: 01-06</option>
+                                        <option value='BEGINNEWS'>Beginning Newspapers</option>
+                                        <option value='EREV'>ErevErev: 03-09</option>
+                                        <option value='ARETZ'>Haaretz: 90-91</option>
+                                        <option value='ARET'>Haaretz: 08</option>
+                                        <option value='MAAR'>Maariv: 04-08</option>
+                                        <option value='RAAN'>Raanana</option>
+                                        <option value='MARKER'>TheMarker: 02</option>
+                                        <option value='YNET'>Ynet: 00-09</option>
+                                        <option value='ALLNEWS' selected="selected">--All News--</option>
+                                        <option value='TANACH'>Tanach</option>
+                                        <option value='MISHNAH'>Mishnah</option>
+                                        <option value='EARLYFICT'>Early Fiction</option>
+                                        <option value='MODFICTO'>Modern Fiction-Orig: 05-10</option>
+                                        <option value='MODFICTT'>Modern Fiction-Tran: 05-10</option>
+                                        <option value='ALLLIT'>--All Literature--</option>
+                                        <option value='MOVIES'>Movies</option>
+                                        <option value='SPOK'>Spoken</option>
+                                        <option value='TAPUZ'>Tapuz Forums</option>
+                                        <option value='ALLCOLLO'>--All Colloquial--</option>
+                                        <option value='JOURNALS'>Journals</option>
+                                        <option value='KNESSET'>Knesset: 03-05</option>
+                                        <option value='ALLSPEC'>--All Specialized--</option>
+                                        <option value='WIKIBOOKS'>Wikibooks</option>
+                                        <option value='WIKINEWS'>Wikinews</option>
+                                        <option value='WIKIPEDIA'>Wikipedia</option>
+                                        <option value='WIKIQUOTE'>Wikiquote</option>
+                                        <option value='WIKISOURCE'>Wikisource</option>
+                                        <option value='ALLWIKI'>--All Wiki Pages--</option>
+                                        <option value='ALLGENRES'>>>ALL GENRES<<</option>
+
+                                    </select>
+                                    <input type="submit" value="submit">
+                                    <div class="searchMessage" id="searchError1"></div>
+
+                                    <div class="right"><a href="searchAdvanced.php?page_type=lookup">advanced search</a>
+                                    </div>
+                                </td>
+                                <td class="instructions"><a
+                                        onClick="javascript:window.open('instructions.php','window','scrollbars,resizable,dependent,width=750,height=600,left=0,top=0')">instructions</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <span class="vowels"><input type='text' name=userID value="1281">trywhat. </span>
+                    </form>
+
+                </div>
+            </td>
+            <td class="titlebar">
+                hebrewCorpus
+                <h2>search tool for students and scholars</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="menu" colspan="2">
+										<span class="searched_word">
+							search results for <span class="wordSearched">tnwEh,twnwEh,tnwEh</span> | <span
+                                                class="wordSearched">תנועה,תונועה,תנועה</span> in --All News--						</span>
+                <span class="menuTitle"><a href="?page=results" class="menuLink">summary</a></span>
+                <span class="menuTitle"><a href="?page=citations&sort=rBeforeW&start=1"
+                                           class="menuLink">citations</a></span>
+                <span class="menuTitle"><a href="?page=subsections" class="menuLink">subsections</a></span>
+                <span class="menuTitle"><a href="?page=wordForms" class="menuLink">word forms</a></span>
+                <span class="menuTitle"><a href="?page=wordBefAft" class="menuLink">words before/after</a></span>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+<div class="main">
+    <div class="logedIn">logged in as: Nadav</div>
+    <div class="mainResults">
+
+
+        <div class="pageTitle">citations</div>
+        <div class="pageSub">showing 101 through 200 of 4,916 &mdash; sorted by word before
+            <div class="sort"><a href="?page=citations&sort=rAfterW&start=1">sort by word after</a></div>
+            click on number at left for full citation
+        </div>
+        <div class="goTo">go to page : <a href="?page=citations&sort=rBeforeW&start=1">1</a> | <span
+                class="gray">2</span> | <a href="?page=citations&sort=rBeforeW&start=3">3</a> | <a
+                href="?page=citations&sort=rBeforeW&start=4">4</a> | <a
+                href="?page=citations&sort=rBeforeW&start=5">5</a> | <a
+                href="?page=citations&sort=rBeforeW&start=6">6</a> | <a
+                href="?page=citations&sort=rBeforeW&start=7">7</a> | <a
+                href="?page=citations&sort=rBeforeW&start=8">8</a> | <a
+                href="?page=citations&sort=rBeforeW&start=9">9</a> | <a
+                href="?page=citations&sort=rBeforeW&start=10">10</a> | <a href="?page=citations&sort=rBeforeW&start=11">11</a>
+            | <a href="?page=citations&sort=rBeforeW&start=12">12</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=13">13</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=14">14</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=15">15</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=16">16</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=17">17</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=18">18</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=19">19</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=20">20</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=21">21</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=22">22</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=23">23</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=24">24</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=25">25</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=26">26</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=27">27</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=28">28</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=29">29</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=30">30</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=31">31</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=32">32</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=33">33</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=34">34</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=35">35</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=36">36</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=37">37</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=38">38</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=39">39</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=40">40</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=41">41</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=42">42</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=43">43</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=44">44</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=45">45</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=46">46</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=47">47</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=48">48</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=49">49</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=50">50</a> |
+        </div>
+        <table>
+            <tr>
+                <th></th>
+                <th>sort word</th>
+                <th class="right">10 words after</th>
+                <th class="middle">word</th>
+                <th class="left">10 words before</th>
+                <th class="category"><a href="?page=citations&sort=rBeforeW&start=2&reference=TRUE">subsection (click to
+                    see reference)</a></th>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1586','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">101</a></td>
+                <td class="after"></td>
+                <td class="after">מואצת אל העתיד ) קובעת כי התנועה אל העבר כמוה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">היחסות של איינשטיין ( אותה תורה המאפשרת , עקרונית ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1594','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">102</a></td>
+                <td class="after"></td>
+                <td class="after">עממית לקליטת עלייה " , נוסד באחרונה על - ידי</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> ארגון מתנדבים חדש , על"ה "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1595','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">103</a></td>
+                <td class="after"></td>
+                <td class="after">שקיזזה את הירידה בתנועת תיירות השכר מחו"ל . רוב האוכלוסייה</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> גדל שיעור הישראלים במלון מ%02 ל%04 ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1601','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">104</a></td>
+                <td class="after"></td>
+                <td class="after">רוחנית ( למה לא ? מדוע עדת הבבא פחות רוחנית</td>
+                <td class="middle">תנועה</td>
+                <td class="before">וערבים חיו יפה מאוד ביחד בצפון אפריקה . ולכן ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1610','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">105</a></td>
+                <td class="after"></td>
+                <td class="after">זו נועדה לפגוע אך ורק בבני הזוג צאושסקו ובחצרם הפרטית</td>
+                <td class="middle">תנועה</td>
+                <td class="before">מתוכנן היטב של בעלי תפקידים מאוכזבים בביורוקרטיה הממשלתית והצבאית .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1634','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">106</a></td>
+                <td class="after"></td>
+                <td class="after">מן הארץ של יהלומים מעובדים . יום אחד נעצר בלוד</td>
+                <td class="middle">ותנועה</td>
+                <td class="before">גדול . היתה תנועה גדולה לארץ של יהלומים גולמיים ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1678','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">107</a></td>
+                <td class="after"></td>
+                <td class="after">מרכזיים , הרי שזהו פתרון רדוד , לא רציני ,</td>
+                <td class="middle">תנועה</td>
+                <td class="before">הוא מאמין שהפתרון לבעיה הפלשתינית מתמקד ברגיעה יחסית בצירי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1684','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">108</a></td>
+                <td class="after"></td>
+                <td class="after">שירשה לא מעט מן המסורת שהותיר ה"היטלר יוגנד " מתקופת</td>
+                <td class="middle">תנועה</td>
+                <td class="before">להיות גיבור נערץ של " הנוער החופשי הגרמני " ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1691','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">109</a></td>
+                <td class="after"></td>
+                <td class="after">או ישוב , אלא את עצמם בלבד .</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> וכי אין הם מייצגים כל ארגון , גוף ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1696','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">110</a></td>
+                <td class="after"></td>
+                <td class="after">נבונה על פני כל המיגרש וזריזות תכונות בארזיליות מובהקות עד</td>
+                <td class="middle">תנועה</td>
+                <td class="before">בגביע . זו לראשונה הציגו האפריקאים טכניקת - כדור ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1724','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">111</a></td>
+                <td class="after"></td>
+                <td class="after">אידיאולוגית שנגיד עליה מה שנגיד , בכל מקרה נצטרך לקבוע</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ביחס לשמאלנות של חוסיין , ואפילו הוא מאנשי הבעת ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1738','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">112</a></td>
+                <td class="after"></td>
+                <td class="after">המצרים את הנתיב בסתירה לזרימת התנועה שהופנתה אליו . למשל</td>
+                <td class="middle">תנועה</td>
+                <td class="before">, הם מוסיפים מדי שנה על אם הדרך איי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1739','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">113</a></td>
+                <td class="after"></td>
+                <td class="after">משמאל ואו במדרכה הפולשת במפגיע מימינו . מיד לאחר מכן</td>
+                <td class="middle">תנועה</td>
+                <td class="before">, לרחוב קפלן , ורק כך להימנע מפגיעה באי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1741','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">114</a></td>
+                <td class="after"></td>
+                <td class="after">ללא כדור ובגרות משחק . נבחרת הנערים של ברית המועצות</td>
+                <td class="middle">תנועה</td>
+                <td class="before">שלא נראתה בארץ , מבחינת מהירות , חוסן גופני ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1744','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">115</a></td>
+                <td class="after"></td>
+                <td class="after">מיוחדים אינם מורשים להיכנס גם לתחום המוניציפאלי של ירושלים .</td>
+                <td class="middle">תנועה</td>
+                <td class="before">. פלשתינים תושבי הגדה ללא אישורי עבודה או היתרי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1746','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">116</a></td>
+                <td class="after"></td>
+                <td class="after">ומוסיקה הם שני מדיומים שונים " , היא אומרת .</td>
+                <td class="middle">תנועה</td>
+                <td class="before">של התנועה , היא מפריעה לה ופוגמת בניקיון שלה .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1748','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">117</a></td>
+                <td class="after"></td>
+                <td class="after">רפורמיסטית בפתח " שתמכה באבו - איאד , הקוראת להעמיד</td>
+                <td class="middle">תנועה</td>
+                <td class="before">במשא ומתן להסדר באזור . קפידבינבביירות פורסמה חוברת של "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1751','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">118</a></td>
+                <td class="after"></td>
+                <td class="after">המכריזה שעיקר מעייניה בקידום תהליך השלום , חייבת לעצמה ולציבור</td>
+                <td class="middle">תנועה</td>
+                <td class="before">פרס בשנים האחרונות . אבל מפלגה שרוצה לראות שינוי ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1759','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">119</a></td>
+                <td class="after"></td>
+                <td class="after">אופוזיציונית שמאלית ,</td>
+                <td class="middle">תנועה</td>
+                <td class="before">, הנס - דיטריך גנשר ; ו"הפורום החדש " ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1802','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">120</a></td>
+                <td class="after"></td>
+                <td class="after">פוליטית בתוך אגד . אברהם עובדיה ,</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ש"ח . יפה היה פעיל ב"תנועה למען ירושלים " ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1823','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">121</a></td>
+                <td class="after"></td>
+                <td class="after">המתחוללת בעת ובעונה אחת עם השינוי באדריכלות של יבשת אירופה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">החדש . אשר לבריה"ם , היא נתונה עכשיו בתנועה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1828','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">122</a></td>
+                <td class="after"></td>
+                <td class="after">ההתיישבות ) , למועצת יש"ע ולמפלגות שהן תנועות ממוסדות עם</td>
+                <td class="middle">תנועה</td>
+                <td class="before">את כל התנועה הרעיונית . מרכז הכובד עבר לאמנה (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1830','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">123</a></td>
+                <td class="after"></td>
+                <td class="after">בעלת מאפיינים ליברליים הזוכה בסקרים ל%12 מהקולות .</td>
+                <td class="middle">תנועה</td>
+                <td class="before">המפלגה המתחרה על הבכורה היא " איגוד הדמוקרטים החופשיים "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1834','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">124</a></td>
+                <td class="after"></td>
+                <td class="after">לאומית מתקדמת ) יוצא אל מחוץ לחוק העלה אתמול במליאה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">להימשך היום . קפידבינדרישה שתא הסטודנטים הערביים הקרוי תל"ם (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1835','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">125</a></td>
+                <td class="after"></td>
+                <td class="after">במדרון מסולע . הסתכלתי למעלה וראיתי מרחוק ילד צנום ונמוך</td>
+                <td class="middle">תנועה</td>
+                <td class="before">עצמי נבוך , מבויש , מבולבל : אדם כבד -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1841','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">126</a></td>
+                <td class="after"></td>
+                <td class="after">גדולה הרבה יותר היא לדבריו של בחורי הישיבות . מדובר</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> אוכלוסייה זו לא עולה להערכתו על 002003 נוסעים .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1843','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">127</a></td>
+                <td class="after"></td>
+                <td class="after">של דוברי - רוסית המתנגדת להכרזת העצמאות . קפידבינראשי שלוש</td>
+                <td class="middle">תנועה</td>
+                <td class="before">הפרלמט הלאטווי אמרה כי על העלונים חתומה " אינטרפרונט "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1860','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">128</a></td>
+                <td class="after"></td>
+                <td class="after">בין - לאומית הולכת וגדלה של מוסלמים פונדמנטליסטים , בעלת</td>
+                <td class="middle">תנועה</td>
+                <td class="before">לוס - אנגלס ( מיוחד ל"הארץ " ) . "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1866','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">129</a></td>
+                <td class="after"></td>
+                <td class="after">" של ממש , ובאחרית ימיו גם המעטים שהתיימרו להוות</td>
+                <td class="middle">תנועה</td>
+                <td class="before">לשאר תמהוני העיר הזאת . לכהנא לא היתה מעולם "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1867','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">130</a></td>
+                <td class="after"></td>
+                <td class="after">" . מן הסתם היה מצליח שוב להיבחר לכנסת ,</td>
+                <td class="middle">תנועה</td>
+                <td class="before">אותה היו למעשה רק חבורה של בודדים , לא "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1878','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">131</a></td>
+                <td class="after"></td>
+                <td class="after">לא לגיטימית שכמותה היתה חייבת לקום . התדהמה בציבור מן</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ולבלשי משטרה סמויים החודרים ומפקחים מקרוב על הפאנאטים בימין .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1895','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">132</a></td>
+                <td class="after"></td>
+                <td class="after">מוזרה ואף מופלאה שבמסגרתה חברו כמה וכמה מבני המנהיגים הקומוניסטים</td>
+                <td class="middle">תנועה</td>
+                <td class="before">באותם יהודים הפעילים במה שקרוי הרנסנס היהודי של פולין ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1901','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">133</a></td>
+                <td class="after"></td>
+                <td class="after">ארוך המפריד בין מסלול נסיעתו לבין שדרות רוטשילד . עוד</td>
+                <td class="middle">תנועה</td>
+                <td class="before">אוזל והולך . אמבולנס אינו יכול להגיע בגלל אי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1903','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">134</a></td>
+                <td class="after"></td>
+                <td class="after">זו המתבססת על מצעו של מזובייצקי , תתכונן לעימות אלקטורלי</td>
+                <td class="middle">תנועה</td>
+                <td class="before">" , שתחת דגלה ישתתפו בבחירות לפרלמנט באביב הבא .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1916','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">135</a></td>
+                <td class="after"></td>
+                <td class="after">עדתית - פוליטית יחידה בישראל שהצליחה . כל קודמותיה נכשלו</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> פרשת תנועת ש"ס .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1918','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">136</a></td>
+                <td class="after"></td>
+                <td class="after">אחרונה זו , שהיא , למעשה , התרחקות מתמדת של</td>
+                <td class="middle">תנועה</td>
+                <td class="before">עם כל הגלקסיה הוא נע במהירות ביחס לגלקסיות אחרות .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1919','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">137</a></td>
+                <td class="after"></td>
+                <td class="after">עדתית - פוליטית יחידה בישראל שהצליחה . כל קודמותיה נכשלו</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> פרשת תנועת ש"ס .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1921','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">138</a></td>
+                <td class="after"></td>
+                <td class="after">אחרונה זו , שהיא , למעשה , התרחקות מתמדת של</td>
+                <td class="middle">תנועה</td>
+                <td class="before">עם כל הגלקסיה הוא נע במהירות ביחס לגלקסיות אחרות .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1926','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">139</a></td>
+                <td class="after"></td>
+                <td class="after">דתית , מדברת בהודעתה על " הערכים החינוכיים שעליהם מושתתת</td>
+                <td class="middle">תנועה</td>
+                <td class="before">לדעת הנהלת הכלא בארה"ב נקי עתה מסמים . אליצור ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1930','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">140</a></td>
+                <td class="after"></td>
+                <td class="after">פוליטית קטנה עם אידיאולוגיה אנרכיסטית החלה לארגן את תנועת "</td>
+                <td class="middle">תנועה</td>
+                <td class="before">דירות יוקרתי , הפך למטרה קבועה של התקפות והפגנות .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2164','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">141</a></td>
+                <td class="after"></td>
+                <td class="after">המבקשת לתת לחיים לפרוץ ולפרוח.</td>
+                <td class="middle">תנועה</td>
+                <td class="before">עליהן הכלח בקיצור השמאל רואה ומציג עצמו כתנועת שחרור -</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2176','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">142</a></td>
+                <td class="after"></td>
+                <td class="after">חופשית של בעלי ידע והשכלה נדרשת, בעיקר לעבר הארצות העשירות.</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> *</td>
+                <td class="citNum">TheMarker</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2392','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">143</a></td>
+                <td class="after"></td>
+                <td class="after">הפועלת משנת 2001 ומקדמת חופש בחירה בלידה, כתבה במניפסט שלה</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> התנועה 'נשים קוראות ללדת' -</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2687','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">144</a></td>
+                <td class="after"></td>
+                <td class="after">אמנותית שהחלה להתגבש בסוף שנות ה-80 ומורכבת מאמנים היוצרים יצירות</td>
+                <td class="middle">תנועה</td>
+                <td class="before">מאמנים עכשוויים ועד הזרם המכונה YBA, "אמנים בריטים צעירים" -</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3468','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">145</a></td>
+                <td class="after"></td>
+                <td class="after">בלתי חומרית בעליל: מילים, מחשבות, תחושות ורגשות. זרם תודעה המתקיים</td>
+                <td class="middle">תנועה</td>
+                <td class="before">מובן, אך אמיתי ומוחשי להחריד, מתרחשת כאן זרימה "מימית" -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3612','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">146</a></td>
+                <td class="after"></td>
+                <td class="after">דתית שנועדה, כל לפי האתר הרשמי, לכסות את צדו "המיסטי"</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> ,</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3696','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">147</a></td>
+                <td class="after"></td>
+                <td class="after">, וכמובן יעשה הרבה , על פי הבטחתו , לקידומו</td>
+                <td class="middle">תנועה</td>
+                <td class="before">. הוא גם בודק את האפשרויות להפעלתה של משטרת -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3710','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">148</a></td>
+                <td class="after"></td>
+                <td class="after">תמימה מתגלגלת לנגד עינינו לממדים המזכירים ראשיתן של תנועות פטשיסטיות</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> בסגנון " דאוס אקס מאכינה " אלקטוראלי .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3718','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">149</a></td>
+                <td class="after"></td>
+                <td class="after">בלתי פוסקת עם ובלי כדור ; מגינים תומכים ומהירים ;</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> הנעת הכדור תענוג . פסים ארוכים ומדוייקים ;</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3723','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">150</a></td>
+                <td class="after"></td>
+                <td class="after">דו - שלבית " , כפי שאומר רבין ) תצייד</td>
+                <td class="middle">תנועה</td>
+                <td class="before">לישיבת לשכת המפלגה ביום חמישי בשבוע הבא , ( "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3729','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">151</a></td>
+                <td class="after"></td>
+                <td class="after">קטנה לאורך הגבולות " משני הצדדים , ועם " התנועה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">, עם הגלאסנוסט של גורבצוב , הותר מה שמכונה "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3738','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">152</a></td>
+                <td class="after"></td>
+                <td class="after">שביקש להימלט . לבסוף הצטיידתי גם אני בתעודת - זיהוי</td>
+                <td class="middle">תנועה</td>
+                <td class="before">הבית הריק למפעל לזיוף מסמכים ונתנו אותם לכל חבר -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3748','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">153</a></td>
+                <td class="after"></td>
+                <td class="after">ההמונית שקמה יש הכוח להגשים משאלה יחידה בלבד ; מן</td>
+                <td class="middle">לתנועה</td>
+                <td class="before">הרצון להסיר מועקה מיידית , בלי החזון שמעבר לכך .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3756','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">154</a></td>
+                <td class="after"></td>
+                <td class="after">וברשימת עונשים פרועים לחלוטין , הוא ימשיך לעשות רק זאת</td>
+                <td class="middle">תנועה</td>
+                <td class="before">עוד יכול השלטון לנפנף בחבילה תופחת והולכת של דו"חות -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3758','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">155</a></td>
+                <td class="after"></td>
+                <td class="after">פוליטית שמרנית . האלימות מתפשטת למחוזות אחרים ולסיעות אחרות ,</td>
+                <td class="middle">תנועה</td>
+                <td class="before">בלחימה אכזרית בנאטאל בין הקונגרס הלאומי האפריקאי לבין אינקטה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3765','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">156</a></td>
+                <td class="after"></td>
+                <td class="after">שהוקמה בירדן בעקבות הפלישה העיראקית לכוויית , הודיעו אתמול כי</td>
+                <td class="middle">תנועה</td>
+                <td class="before">. ראשי " הוועדה העממית להגנה על האומה הערבית "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3785','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">157</a></td>
+                <td class="after"></td>
+                <td class="after">. אין - ספק כי לאחר שכמה מאות אנשים ישבו</td>
+                <td class="middle">תנועה</td>
+                <td class="before">שנות מאסר עם עבודת - פרך על כל עבירת -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3794','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">158</a></td>
+                <td class="after"></td>
+                <td class="after">,</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ניקוי או חמרים כימיים אחרים , עבירות על חוקי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3796','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">159</a></td>
+                <td class="after"></td>
+                <td class="after">זו התעמתה השנה פעמים מספר עם " מפלגת העם הפקיסטני</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ללא אבחנה מתוך מכוניות נוסעות לעבר תומכי תנועת מוהאגיר .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3809','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">160</a></td>
+                <td class="after"></td>
+                <td class="after">חדשה , אחדות חדשה תיפתח כאן היום " , אמר</td>
+                <td class="middle">תנועה</td>
+                <td class="before">לשכנע כי הוא יורשו הפוליטי הלגיטימי של זיה . "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3823','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">161</a></td>
+                <td class="after"></td>
+                <td class="after">עמוסה למדי מנעה חדוות - נהיגה אמיתית , וגם בלעדיה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">מן הדוושה . בדרך למיראמאס לא שבעתי הרבה נחת .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3827','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">162</a></td>
+                <td class="after"></td>
+                <td class="after">ודת , בניגוד למתחייב מהסכמי לוזאן . ביקורת נוקבת במיוחד</td>
+                <td class="middle">תנועה</td>
+                <td class="before">הגבלות שמוטלות על הטורקים ביוון בכל הקשור לחופש ההבעה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3862','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">163</a></td>
+                <td class="after"></td>
+                <td class="after">שעלולה להיות הרת אסון , בעיקר בעת תאונה . חשוב</td>
+                <td class="middle">תנועה</td>
+                <td class="before">הרכב . מתקן הריסון מונע את תנועת הגוף קדימה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3874','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">164</a></td>
+                <td class="after"></td>
+                <td class="after">זו , שכוחותיה מחופרים ומבוצרים בגבולות עיראק , מוכנה לשוב</td>
+                <td class="middle">תנועה</td>
+                <td class="before">אבל הפעם נשאר הפוטנציאל הצבאי שלה כמעט ללא פגע :</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3881','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">165</a></td>
+                <td class="after"></td>
+                <td class="after">דלילה של קונים , הרוכשים בעיקר אופנה של מקלטים וחדרים</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ההלבשה ובמחלקות האופנה ברשתות השיווק אינו מותיר מקום לספק :</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3883','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">166</a></td>
+                <td class="after"></td>
+                <td class="after">של חלקי קרום כוכב הלכת גרמה להתרוממות הלוח , בערך</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ק"ם מעל המישור שסביבה . על - פי ההשערה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3919','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">167</a></td>
+                <td class="after"></td>
+                <td class="after">, מגע ושירה . חלק גדול ועיקרי מבוסס על מגע</td>
+                <td class="middle">תנועה</td>
+                <td class="before">להעסיק את השחקנים בדברים אחרים . לשחרר אותם בשיחות ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3939','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">168</a></td>
+                <td class="after"></td>
+                <td class="after">ולפעילות קרבית . דרישות אלו שונות מאלו המוטלות על האזרח</td>
+                <td class="middle">לתנועה</td>
+                <td class="before">של המסיכה , שנקבעו על פי הצרכים המבצעיים לתפקוד ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3946','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">169</a></td>
+                <td class="after"></td>
+                <td class="after">זו , שבתחילת דרכה היתה איגוד מקצועי של פועלי מספנה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">המפלגה במעוז הכוח שלה גדאנסק כדי לבחור במחליף לוואלנסה .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3955','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">170</a></td>
+                <td class="after"></td>
+                <td class="after">זו מושפעת מעמדתו היונית של מנהיגה , הרב עובדיה יוסף</td>
+                <td class="middle">תנועה</td>
+                <td class="before">השרים אריה דרעי ורפאל פנחסי , עשויים לעמוד למשפט .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3975','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">171</a></td>
+                <td class="after"></td>
+                <td class="after">ערבית לאומית בשלב התפתחות עוברי שהתמקדה בדמשק היו אבני הבנייה</td>
+                <td class="middle">ותנועה</td>
+                <td class="before"> בראש חברה שבטית ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3979','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">172</a></td>
+                <td class="after"></td>
+                <td class="after">שהוקמה בשלהי המאה הקודמת במזרח - אירופה כדי להחזיר את</td>
+                <td class="middle">תנועה</td>
+                <td class="before">בפברואר ברחבי ארצות - הברית . איך הגיעה הציונות ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3994','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">173</a></td>
+                <td class="after"></td>
+                <td class="after">, מכוניות , ראי הוא ימצא את עצמו בן -</td>
+                <td class="middle">תנועה</td>
+                <td class="before">עין מן המחוג כדי לראות זוטות מיותרות כמו כביש ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4002','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">174</a></td>
+                <td class="after"></td>
+                <td class="after">של התנגדות לאנטישמיות , בעיקר בלנינגרד .</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> כן צמחה , או גברה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4016','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">175</a></td>
+                <td class="after"></td>
+                <td class="after">שוטפת ומהנה של מרבית השחקנים . הבית"רים הציבו שמירה אישית</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> הרבה מצבים של כמעט - שער ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4061','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">176</a></td>
+                <td class="after"></td>
+                <td class="after">, חקירות ומשמר הגבול .</td>
+                <td class="middle">תנועה</td>
+                <td class="before">רכב משטרתיים במשימות שוטפות ומיוחדות ניידות סיור , חבלה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4064','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">177</a></td>
+                <td class="after"></td>
+                <td class="after">בין - עירונית מוגברת בלטה אתמול , ביום ההפצצה .</td>
+                <td class="middle">תנועה</td>
+                <td class="before">שנחשבה גם אז כעיר קודש חסינה מהפצצות אויב . "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4065','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">178</a></td>
+                <td class="after"></td>
+                <td class="after">זו מקיימת קשרים עם תושבים בכוויית הכבושה .</td>
+                <td class="middle">תנועה</td>
+                <td class="before">מרכז הפעולות של תנועת ההתנגדות " כוויית החופשית " .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4073','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">179</a></td>
+                <td class="after"></td>
+                <td class="after">חברתית שאיננה רוצה להגיע למצב של פשיטת רגל כלכלית חייבת</td>
+                <td class="middle">ותנועה</td>
+                <td class="before">שיכול להדפיס כסף מסוגל היום לממן את הרפואה הטכנולוגית ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4090','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">180</a></td>
+                <td class="after"></td>
+                <td class="after">ירוקה " , שרק עכשיו התעוררה לטפל במשבר באיכות הסביבה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">חופשית , אולם גם מזוהמת . בברית המועצות צצה "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4095','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">181</a></td>
+                <td class="after"></td>
+                <td class="after">פוליטית עצמאית " . המפגינים טענו ,</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> כי אין היא מקימה מפלגה , אלא "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4100','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">182</a></td>
+                <td class="after"></td>
+                <td class="after">מסוימת בזמן עשויה להיות אפשרית מבחינה עקרונית , ואין עוד</td>
+                <td class="middle">תנועה</td>
+                <td class="before">פיסיקאים תיאורטיים ואומרים כי בניגוד למה שהיה מקובל לחשוב ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4101','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">183</a></td>
+                <td class="after"></td>
+                <td class="after">אל העבר . אל העתיד אנו נעים ממילא ,</td>
+                <td class="middle">לתנועה</td>
+                <td class="before"> הכוונה היא , בדרך כלל ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4104','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">184</a></td>
+                <td class="after"></td>
+                <td class="after">מואצת אל העתיד ) קובעת כי התנועה אל העבר כמוה</td>
+                <td class="middle">תנועה</td>
+                <td class="before">היחסות של איינשטיין ( אותה תורה המאפשרת , עקרונית ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4114','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">185</a></td>
+                <td class="after"></td>
+                <td class="after">עממית לקליטת עלייה " , נוסד באחרונה על - ידי</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> ארגון מתנדבים חדש , על"ה "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4115','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">186</a></td>
+                <td class="after"></td>
+                <td class="after">שקיזזה את הירידה בתנועת תיירות השכר מחו"ל . רוב האוכלוסייה</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> גדל שיעור הישראלים במלון מ%02 ל%04 ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4124','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">187</a></td>
+                <td class="after"></td>
+                <td class="after">רוחנית ( למה לא ? מדוע עדת הבבא פחות רוחנית</td>
+                <td class="middle">תנועה</td>
+                <td class="before">וערבים חיו יפה מאוד ביחד בצפון אפריקה . ולכן ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4134','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">188</a></td>
+                <td class="after"></td>
+                <td class="after">זו נועדה לפגוע אך ורק בבני הזוג צאושסקו ובחצרם הפרטית</td>
+                <td class="middle">תנועה</td>
+                <td class="before">מתוכנן היטב של בעלי תפקידים מאוכזבים בביורוקרטיה הממשלתית והצבאית .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4148','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">189</a></td>
+                <td class="after"></td>
+                <td class="after">יש כבר 7 .</td>
+                <td class="middle">לתנועה</td>
+                <td class="before"> שתכלול מפעלים ממשלתיים לצד מפעלים פרטיים . לדבריו ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4173','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">190</a></td>
+                <td class="after"></td>
+                <td class="after">האיסלאמית עיתון ותיק ומרכזי יותר הירחון " אל סראט "</td>
+                <td class="middle">לתנועה</td>
+                <td class="before"> להביא לביטול צו הסגירה .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4176','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">191</a></td>
+                <td class="after"></td>
+                <td class="after">מן הארץ של יהלומים מעובדים . יום אחד נעצר בלוד</td>
+                <td class="middle">ותנועה</td>
+                <td class="before">גדול . היתה תנועה גדולה לארץ של יהלומים גולמיים ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4182','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">192</a></td>
+                <td class="after"></td>
+                <td class="after">האיסלאמית עיתון ותיק ומרכזי יותר הירחון " אל סראט "</td>
+                <td class="middle">לתנועה</td>
+                <td class="before"> להביא לביטול צו הסגירה .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4242','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">193</a></td>
+                <td class="after"></td>
+                <td class="after">מרכזיים , הרי שזהו פתרון רדוד , לא רציני ,</td>
+                <td class="middle">תנועה</td>
+                <td class="before">הוא מאמין שהפתרון לבעיה הפלשתינית מתמקד ברגיעה יחסית בצירי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4249','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">194</a></td>
+                <td class="after"></td>
+                <td class="after">שירשה לא מעט מן המסורת שהותיר ה"היטלר יוגנד " מתקופת</td>
+                <td class="middle">תנועה</td>
+                <td class="before">להיות גיבור נערץ של " הנוער החופשי הגרמני " ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4257','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">195</a></td>
+                <td class="after"></td>
+                <td class="after">או ישוב , אלא את עצמם בלבד .</td>
+                <td class="middle">תנועה</td>
+                <td class="before"> וכי אין הם מייצגים כל ארגון , גוף ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4263','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">196</a></td>
+                <td class="after"></td>
+                <td class="after">נבונה על פני כל המיגרש וזריזות תכונות בארזיליות מובהקות עד</td>
+                <td class="middle">תנועה</td>
+                <td class="before">בגביע . זו לראשונה הציגו האפריקאים טכניקת - כדור ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4303','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">197</a></td>
+                <td class="after"></td>
+                <td class="after">אידיאולוגית שנגיד עליה מה שנגיד , בכל מקרה נצטרך לקבוע</td>
+                <td class="middle">תנועה</td>
+                <td class="before">ביחס לשמאלנות של חוסיין , ואפילו הוא מאנשי הבעת ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4320','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">198</a></td>
+                <td class="after"></td>
+                <td class="after">המצרים את הנתיב בסתירה לזרימת התנועה שהופנתה אליו . למשל</td>
+                <td class="middle">תנועה</td>
+                <td class="before">, הם מוסיפים מדי שנה על אם הדרך איי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4321','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">199</a></td>
+                <td class="after"></td>
+                <td class="after">משמאל ואו במדרכה הפולשת במפגיע מימינו . מיד לאחר מכן</td>
+                <td class="middle">תנועה</td>
+                <td class="before">, לרחוב קפלן , ורק כך להימנע מפגיעה באי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4324','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">200</a></td>
+                <td class="after"></td>
+                <td class="after">ללא כדור ובגרות משחק . נבחרת הנערים של ברית המועצות</td>
+                <td class="middle">תנועה</td>
+                <td class="before">שלא נראתה בארץ , מבחינת מהירות , חוסן גופני ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div class="credits">site maintained by <a href="mailto:justin.parry@mail.utexas.edu">Justin Parry</a>. contact him with
+    any problems or suggestions.
+</div>
+</body>
+</html>

@@ -1,0 +1,1198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>hebrewCorpus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link href="instructionstyles.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        function check() {
+            var error = "false";
+            if (document.searchForm.word.value == "" && document.searchForm.wordAR.value == "") {
+                document.getElementById("searchError1").innerHTML = "search for a word";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.word.value != "" && document.searchForm.wordAR.value != "") {
+                document.getElementById("searchError1").innerHTML = "search for word in ht or arabic";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.pos.value == "---") {
+                document.getElementById("searchError1").innerHTML = "choose pos";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.corpus.value == "") {
+                document.getElementById("searchError1").innerHTML = "choose corpus";
+                return false;
+            }
+            ;
+
+        };
+
+
+        var numHolder = 0;
+
+        function showIns(divId) {
+
+            if (document.getElementById(divId).style.display == "none" || document.getElementById(divId).style.display == false) {
+                //if (numHolder > 1){
+                document.getElementById(divId).style.display = "block";
+                numHolder = 0;
+            } else {
+                document.getElementById(divId).style.display = "none";
+                numHolder = 2;
+            }
+            ;
+
+        };
+
+    </script>
+
+</head>
+
+<body>
+<div>
+    <table class="topBar" cellspacing="0px">
+        <tr>
+            <td>
+                <div class="search">
+
+                    <form name="searchForm" action="search.cgi" method="POST" onSubmit="return check()">
+                        <table class="table2" cellspacing="0px">
+                            <tr>
+                                <td>latin chars &nbsp;&nbsp;<a
+                                        onClick="javascript:window.open('dt.html','window','scrollbars,resizable,dependent,width=400,height=400,left=0,top=0')">(transliteration
+                                    help)</a></td>
+                                <td>hebrew chars</td>
+                                <td>part of speech</td>
+                                <td>subcorpus</td>
+
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><input class="dt" type="TEXT" name="word"></td>
+                                <td rowspan="2"><input class="arabic" type="TEXT" name="wordAR" lang=he size=12></td>
+                                <td>
+                                    <select name="pos">
+                                        <option>---</option>
+                                        <option selected="selected">noun</option>
+                                        <option>adj</option>
+                                        <option>adv</option>
+                                        <option>verb</option>
+                                        <option>string</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="corpus">
+                                        <option value="">---</option>
+                                        <option value='ARUTZ'>Arutz 7: 01-06</option>
+                                        <option value='BEGINNEWS'>Beginning Newspapers</option>
+                                        <option value='EREV'>ErevErev: 03-09</option>
+                                        <option value='ARETZ'>Haaretz: 90-91</option>
+                                        <option value='ARET'>Haaretz: 08</option>
+                                        <option value='MAAR'>Maariv: 04-08</option>
+                                        <option value='RAAN'>Raanana</option>
+                                        <option value='MARKER'>TheMarker: 02</option>
+                                        <option value='YNET'>Ynet: 00-09</option>
+                                        <option value='ALLNEWS'>--All News--</option>
+                                        <option value='TANACH'>Tanach</option>
+                                        <option value='MISHNAH'>Mishnah</option>
+                                        <option value='EARLYFICT'>Early Fiction</option>
+                                        <option value='MODFICTO'>Modern Fiction-Orig: 05-10</option>
+                                        <option value='MODFICTT'>Modern Fiction-Tran: 05-10</option>
+                                        <option value='ALLLIT' selected="selected">--All Literature--</option>
+                                        <option value='MOVIES'>Movies</option>
+                                        <option value='SPOK'>Spoken</option>
+                                        <option value='TAPUZ'>Tapuz Forums</option>
+                                        <option value='ALLCOLLO'>--All Colloquial--</option>
+                                        <option value='JOURNALS'>Journals</option>
+                                        <option value='KNESSET'>Knesset: 03-05</option>
+                                        <option value='ALLSPEC'>--All Specialized--</option>
+                                        <option value='WIKIBOOKS'>Wikibooks</option>
+                                        <option value='WIKINEWS'>Wikinews</option>
+                                        <option value='WIKIPEDIA'>Wikipedia</option>
+                                        <option value='WIKIQUOTE'>Wikiquote</option>
+                                        <option value='WIKISOURCE'>Wikisource</option>
+                                        <option value='ALLWIKI'>--All Wiki Pages--</option>
+                                        <option value='ALLGENRES'>>>ALL GENRES<<</option>
+
+                                    </select>
+                                    <input type="submit" value="submit">
+                                    <div class="searchMessage" id="searchError1"></div>
+
+                                    <div class="right"><a href="searchAdvanced.php?page_type=lookup">advanced search</a>
+                                    </div>
+                                </td>
+                                <td class="instructions"><a
+                                        onClick="javascript:window.open('instructions.php','window','scrollbars,resizable,dependent,width=750,height=600,left=0,top=0')">instructions</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <span class="vowels"><input type='text' name=userID value="1281">trywhat. </span>
+                    </form>
+
+                </div>
+            </td>
+            <td class="titlebar">
+                hebrewCorpus
+                <h2>search tool for students and scholars</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="menu" colspan="2">
+										<span class="searched_word">
+							search results for <span class="wordSearched">ArgmN</span> | <span class="wordSearched">ארגמן</span> in --All Literature--						</span>
+                <span class="menuTitle"><a href="?page=results" class="menuLink">summary</a></span>
+                <span class="menuTitle"><a href="?page=citations&sort=rBeforeW&start=1"
+                                           class="menuLink">citations</a></span>
+                <span class="menuTitle"><a href="?page=subsections" class="menuLink">subsections</a></span>
+                <span class="menuTitle"><a href="?page=wordForms" class="menuLink">word forms</a></span>
+                <span class="menuTitle"><a href="?page=wordBefAft" class="menuLink">words before/after</a></span>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+<div class="main">
+    <div class="logedIn">logged in as: Nadav</div>
+    <div class="mainResults">
+
+
+        <div class="pageTitle">citations</div>
+        <div class="pageSub">showing 1 through 100 of 204 &mdash; sorted by word before
+            <div class="sort"><a href="?page=citations&sort=rAfterW&start=1">sort by word after</a></div>
+            click on number at left for full citation
+        </div>
+        <div class="goTo">go to page : <span class="gray">1</span> | <a
+                href="?page=citations&sort=rBeforeW&start=2">2</a> | <a
+                href="?page=citations&sort=rBeforeW&start=3">3</a> |
+        </div>
+        <table>
+            <tr>
+                <th></th>
+                <th>sort word</th>
+                <th class="right">10 words after</th>
+                <th class="middle">word</th>
+                <th class="left">10 words before</th>
+                <th class="category"><a href="?page=citations&sort=rBeforeW&start=1&reference=TRUE">subsection (click to
+                    see reference)</a></th>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=90','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">1</a></td>
+                <td class="after"></td>
+                <td class="after">שבפאתי מערב הולך ועומם, ומתחילים להדליק את הנרות בפנס הצבעונים</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">הן עסקניות ושמנמניות, תופסות ובודקות כל דבר. לפנות ערב -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=111','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">2</a></td>
+                <td class="after"></td>
+                <td class="after">אפל לוכד זהרורים על הרשתית. היא צריכה לשתות קפה, לטעום</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">ומשהו אחר ממשיך להסתובב. היא עוצמת עפעפיים מול הניאון -</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=124','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">3</a></td>
+                <td class="after">אבל</td>
+                <td class="after">שייטו בעיניה. בכל אותו הערב מנתה את מעלותיה של עטרה.</td>
+                <td class="middle">ארגמניים</td>
+                <td class="before">שתי קומות בשמונה דקות, המסכנה..." לחשה אליו אמו, ונימי אבל</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=55','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">4</a></td>
+                <td class="after">אדמות</td>
+                <td class="after">של שלמה, שעשתה לו אמו ביום חתונתו, ככתוב בשיר השירים,</td>
+                <td class="middle">כארגמן</td>
+                <td class="before">ואשר עיניו יושבות על תכלת כשמשות בוערות ואשר שפתותיו אדמות</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=70','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">5</a></td>
+                <td class="after">אדם</td>
+                <td class="after">הצניף את ראשו, אבל מצנפת אדמה זו התהפכה מהר לפז,</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">שחורים. פתאם הואר קצהו העליון של גוש עמום זה, אדם</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">6</a></td>
+                <td class="after">אודם</td>
+                <td class="after">כיסה את לחייה, הבית והרצפה והתקרה יצאו לפניה במחול, סובבים</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">שמשון-אנשל, הבקבוק נתרוקן והאפקה נתמלאה, ורוח חדשה באה בה, אודם</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=87','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">7</a></td>
+                <td class="after">אודם</td>
+                <td class="after">מעל לחיי החנווני על פנקסו וחובש בית המדרש על ספסלו,</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">בני העיר, אף של אותם עוסקים במקצועות אחרים, וחלף אודם</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=24','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">8</a></td>
+                <td class="after">אור</td>
+                <td class="after">מבהיק. ידו תחבק מתניה - ואוחז הוא את רוזה "שלו"</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">ישבו בסירת-דוגה - והם נשאים על גלי התכלת בתוך אור</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=66','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">9</a></td>
+                <td class="after">אור</td>
+                <td class="after"></td>
+                <td class="middle">ארגמן...</td>
+                <td class="before">ואינם. ומבעד לחלונות ולדלתות פתוחים נשקפים הכירים בעינים מפיצות אור</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=120','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">10</a></td>
+                <td class="after">אירוסים</td>
+                <td class="after">אחרונים ושבילים שבילים ירוקים של סוף האביב. אנחנו עוקבים אחרי</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">האירוסים הקסומה, שנמצאת ממש ליד הבית. נשארו עוד כמה אירוסים</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=95','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">11</a></td>
+                <td class="after">אלמוגי</td>
+                <td class="after">במקום שעמד בימי קדם מקדש האליל, וגם חג הברברה אשר</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">נשארו, כמו חג מעלכאר הקדוש (מעלקארט), אשר אז יצודו אלמוגי</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=41','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">12</a></td>
+                <td class="after">באדר</td>
+                <td class="after">בהיר, וחצי השמים מזה כוסה בתכלת כהה...</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">השחורות נכתרו בזר מבהיק מסביב; חצי השמים מזה התעטף באדר</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=121','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">13</a></td>
+                <td class="after">באודם</td>
+                <td class="after">על תנוכי אוזניה המדולדלים נתלו עגילי זהב גדולים, עשויים רקמת</td>
+                <td class="middle">ארגמני.</td>
+                <td class="before">היו חרושים בלחייה והם ירדו עד לפה מכווץ, משוח באודם</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=72','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">14</a></td>
+                <td class="after">בבגד</td>
+                <td class="after">מרוקם מחוטי זהב ודמות יד ולב וראש להם, גם אות</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">בידם ולא יסבו עיניהם מהראש אשר ישב בתוך מלבש בבגד</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=193','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">15</a></td>
+                <td class="after">בגד</td>
+                <td class="after">(14) ונתנו עליו את כל כליו אשר ישרתו עליו בהם</td>
+                <td class="middle">ארגמן:</td>
+                <td class="before">על המוט: (13) ודשנו את המזבח | ופרשו עליו בגד</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=27','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">16</a></td>
+                <td class="after">בגדי</td>
+                <td class="after">יפים כמראה הקשת ונוגה להם והדר להם; וישאל למי כל</td>
+                <td class="middle">ארגמן,</td>
+                <td class="before">למי? ויען אותו לאמור: ודויד מלך ישראל, אלה. ראה בגדי</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=31','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">17</a></td>
+                <td class="after">בגדי</td>
+                <td class="after">נשא תמיד שק על בשרו ויצם תעניות הרבה וינה את</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">והוא לא גבה לבו ולא התרומם על אחיו; תחת בגדי</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=34','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">18</a></td>
+                <td class="after">בגדי</td>
+                <td class="after">ותולעת-משי, ובהם אבני פטדה וברקת נוצצות למרחוק. וילמד העקרב את</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">פילים זאבים ושועלים וכל חיתו יער באו, כולם טעונים בגדי</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=132','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">19</a></td>
+                <td class="after">בגוני</td>
+                <td class="after">וכתום.</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">פסק. פיסת שמים הבקיעה מבעד לעננים והפיצה זהרורי אור בגוני</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=18','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">20</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">את ראשי האבירים תמשוכנה עוז. קצובות ידהרו הסוסים, מאמיצי חזה,</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">- וברכב גבור מקשה נצב, וזרועותיו, חשופות שלוחות, בחבלי בוץ</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=29','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">21</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">גם הלויים לבושים מעילי אפוד; וכשהכוהנים פותחים את פיהם, הלויים</td>
+                <td class="middle">וארגמן,</td>
+                <td class="before">תהילים בקול נמוך. וירא והנה הכוהנים לבושים סיריקון מעילי בוץ</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=64','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">22</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">ואין איש בבית, אין גם אחד. נוטל בחור זה את</td>
+                <td class="middle">וארגמן,</td>
+                <td class="before">לפניו וכלים מכלים שונים ומטות זהב וכסף, כרפס ותכלת בוץ</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=100','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">23</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">ותקשרהו בקשר של קיימא,</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">האשה ותגלום את המטמון אשר נתן לה הצדיק בתכריך בוץ</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=103','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">24</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">ועטרת נייר מוצהב בראשו ושרביט עץ בידו - הוא מראה</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">באפר על פניהם ומלובשים בגדי צבעונין. האחד מתכסה בתכריך בוץ</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=106','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">25</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">ואם אעסוק בתורה לא אעשה את תורתי רק קרדום לחפור</td>
+                <td class="middle">וארגמן;</td>
+                <td class="before">ואשתי לא תצא בלבוש מלכות ועיר זהב גדולה ותכריך בוץ</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=201','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">26</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">על גלילי כסף ועמודי שש | מטות זהב וכסף על</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">גנת ביתן המלך: (6) חור כרפס ותכלת אחוז בחבלי בוץ</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=202','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">27</a></td>
+                <td class="after">בוץ</td>
+                <td class="after">| והעיר שושן צהלה ושמחה: (16) ליהודים היתה אורה ושמחה</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">המלך בלבוש מלכות תכלת וחור ועטרת זהב גדולה ותכריך בוץ</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=21','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">28</a></td>
+                <td class="after">בזוהר</td>
+                <td class="after">מניעות ראש מאצל הגדר... ורחבי השדה שמעבר לגדר - כולם</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">כשלג... לטאות בטפוסן המהיר על הגדר כנגד החמה, ודמומיות בזוהר</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=86','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">29</a></td>
+                <td class="after">בטלאים</td>
+                <td class="after">על סכך הגגות של בתי האכרים, נחילים של דבורים זמזמו</td>
+                <td class="middle">ארגמניים</td>
+                <td class="before">הם נקראים בפי העם בפולין: "חברים", הבוצלן הבייתי צמח בטלאים</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">30</a></td>
+                <td class="after">ביריעות</td>
+                <td class="after">ותכלת, בפרחים, זרי תפארה ודגלי צבעים, יושבת דונה קלארה די</td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> ושם על היציעה המהודרה והמקשטה ביריעות</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=10','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">31</a></td>
+                <td class="after">ביריעות</td>
+                <td class="after">ותכלת, בפרחים, זרי תפארת ודגלי צבעים, יושבת דונה קלרה די</td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> ושם על היציעה המהודרה והמקושטה ביריעות</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=61','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">32</a></td>
+                <td class="after">בלבוש</td>
+                <td class="after">לכבוד יום הושענא-רבה ההולך ובא, ומנוגה נגדו התאדמו קצות השמים</td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> נפתחו דלתות שערי מזרח, והשחר יצא בלבוש</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=62','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">33</a></td>
+                <td class="after">במכנסי</td>
+                <td class="after">והכל עומדים לפניו גלויי-ראש! הביטו עוד וראו איך נפוליון ובני</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">הרגיל: זו היא לונדון! האפיפיור רוכב פה על אתונו במכנסי</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=94','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">34</a></td>
+                <td class="after">במעטפות</td>
+                <td class="after">ויתלו בראשו ובצוארו תכשיטי זהב ועדי יקר, אז ישאו הנאספים</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">ינקו למשעי את עור החמור מראשו ועד רגליו ויעטפוהו במעטפות</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=197','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">35</a></td>
+                <td class="after">בנפ</td>
+                <td class="after">ורקמה ובוץ וראמת וכדכד נתנו בעזבוניך: (17) יהודה וארץ ישראל</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">קרי] השיבו אשכרך: (16) ארם סחרתך מרב מעשיך | בנפך</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=125','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">36</a></td>
+                <td class="after">בצבע</td>
+                <td class="after">האיש בחן אותנו. הביקיני הלח שמתחת לטישרט צבט לי את</td>
+                <td class="middle">ארגמן.</td>
+                <td class="before">ואיה התיישבנו על שתי כורסאות גדולות עם ריפוד קטיפה בצבע</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=136','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">37</a></td>
+                <td class="after">בצבע</td>
+                <td class="after">וכובע בגון הפטל מוסט ברישול הצידה על ראשו, אחוריו השריריים</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">לא צבוע עמד איש חיל פרשים משופם במכנסי רכיבה בצבע</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=138','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">38</a></td>
+                <td class="after">בצבע</td>
+                <td class="after">שבו נשמרה החרב המיוחדת שהזמין - מתנה ליום ההולדת השלושה-עשר</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">הארגז הכי קרוב והציץ לתוכו. למעלה נח הנרתיק מקטיפה בצבע</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=146','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">39</a></td>
+                <td class="after">בצבע</td>
+                <td class="after">שנפתח כמעט ללא בושה, לא - הוורד אינו פרח תמים.</td>
+                <td class="middle">ארגמן,</td>
+                <td class="before">הצומח; לה ודאי לא היה יכול להיות קשר לוורד בצבע</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=139','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">40</a></td>
+                <td class="after">ברק</td>
+                <td class="after">רגליו, כך הבחנתי, היו חומות אפילו בקימור כף הרגל. מניסיוני,</td>
+                <td class="middle">ארגמני.</td>
+                <td class="before">קצרים, ורגליו היו יחפות. עורו היה שזוף עד כדי ברק</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=59','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">41</a></td>
+                <td class="after">ברקמת</td>
+                <td class="after">כעלמה יפה-פיה, המיטיבה דרכה לבקש את אהבת בחירה, ופעם פניה</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">ומה נהדרה היא במקום הנחמד הזה, כי פעם תתהדר ברקמת</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=67','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">42</a></td>
+                <td class="after">בשפריר</td>
+                <td class="after">ושופכת פלגי ירקרק חרוץ על ההר ועד עדר הצאן אשר</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">ולא תתבונן בם. עושה היא את דרכה בנחת, טובלת בשפריר</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=180','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">43</a></td>
+                <td class="after">בתכלת</td>
+                <td class="after">בתולעת השני ובשש וארג | עשי כל מלאכה וחשבי מחשבת:</td>
+                <td class="middle">ובארגמן</td>
+                <td class="before">אתם חכמת לב לעשות כל מלאכת חרש וחשב ורקם בתכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=185','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">44</a></td>
+                <td class="after">בתכלת</td>
+                <td class="after">ובתולעת השני ובשש: (24) כל הזהב העשוי למלאכה בכל מלאכת</td>
+                <td class="middle">ובארגמן</td>
+                <td class="before">אהליאב בן אחיסמך למטה דן חרש וחשב | ורקם בתכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=105','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">45</a></td>
+                <td class="after">בתכרי</td>
+                <td class="after">וגביהם מצופים זהב. ועל יד הארון על כן אבן גזית</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">ובעדם נשקפו על פני כל שדרות הארון ספרים רבים בתכריך</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=134','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">46</a></td>
+                <td class="after">גב</td>
+                <td class="after">תלוי על כתפה. אני קמה מן המיטה במאמץ ומשתחלת אל</td>
+                <td class="middle">ארגמני</td>
+                <td class="before">חולצה קצרה בצבע מיץ-ענבים, מכנסיים קצרים בצבע ירוק-פיסטוק, תרמיל גב</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=161','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">47</a></td>
+                <td class="after">גבי</td>
+                <td class="after"></td>
+                <td class="middle">הארגמן</td>
+                <td class="before"> ובחוט שהעבירו על גבי</td>
+                <td class="citNum">Mishnah</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=162','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">48</a></td>
+                <td class="after">גבי</td>
+                <td class="after"></td>
+                <td class="middle">הארגמן</td>
+                <td class="before"> ובכפול שהעבירו על גבי</td>
+                <td class="citNum">Mishnah</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=133','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">49</a></td>
+                <td class="after">גוו</td>
+                <td class="after">פרי עשרות הכלאות, הוא זה שגרם לי לחשוב שיש בו</td>
+                <td class="middle">ארגמני,</td>
+                <td class="before">בעיני. הוא היה שם, גבוה מכפי שדמיינתי. אולי אותו גוון</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=151','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">50</a></td>
+                <td class="after">גוו</td>
+                <td class="after">בגלל הכאב, או אולי בגלל התרופות, הרגשתי שבטני מתהפכת. רק</td>
+                <td class="middle">ארגמני.</td>
+                <td class="before">מעיני, ובאור הפלואורסנטי הכחול ראיתי שלזוהמה מתחת לציפורני יש גוון</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=84','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">51</a></td>
+                <td class="after">גווני</td>
+                <td class="after">מהבהבים, המגבילים ממרחק את שולי האופן, כשהם מסתלסלים על ידי</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">הזהרורים האחרונים של השמש השוקעת והעננים משובצי הזהב עם גווני</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=23','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">52</a></td>
+                <td class="after">גוניפז</td>
+                <td class="after">וירקרק - גבעות ועצי-פרדס נחפו זהב - והנה ברד, כעין</td>
+                <td class="middle">וארגמן,</td>
+                <td class="before">בשקיעת חמתו הנהדרה של יום שבט. האויר הפושר נתמלא גוני-פז</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=153','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">53</a></td>
+                <td class="after">גפ</td>
+                <td class="after"></td>
+                <td class="middle">ארגמני.</td>
+                <td class="before">שלהם, הלך והתפשט ככתם דיו קו דק של צמר גפן</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=166','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">54</a></td>
+                <td class="after">ה</td>
+                <td class="after"></td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> אפלו הן</td>
+                <td class="citNum">Mishnah</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=159','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">55</a></td>
+                <td class="after">הזאבת</td>
+                <td class="after">שבעיניים, כי היא יפה במידה בלתי רגילה. "הנרי!" חיוכה הבהיק</td>
+                <td class="middle">והארגמן</td>
+                <td class="before">נפנתה אליו בבהלה. היה ניתן לראות, חרף האדמימות דמוית הזאבת</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=36','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">56</a></td>
+                <td class="after">הלבישוהו</td>
+                <td class="after">עטפוהו, מיניקותיו ואומנותיו לקחו שכר רב במלאכתן. שמרוהו כבבת-עין, מלאו</td>
+                <td class="middle">ובארגמן</td>
+                <td class="before">דואג בן יוסף היה הילד היותר-רך והיותר-ענוג בירושלים במשי הלבישוהו</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=45','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">57</a></td>
+                <td class="after">הפתוכה</td>
+                <td class="after">וירקרק, מתעטפת בדוק-אפלה בהיר ושקוף. החמה המטפטפת שלות הוד מתגדלת</td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> לפנות ערב. דליקת האויר מתקררת ומתעדנת. תכלת השמים, הפתוכה</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=115','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">58</a></td>
+                <td class="after">התכלת</td>
+                <td class="after">של פרג, צהוב של חרדל - שלבלבו בשלווה ובנחת עד</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">והיבליות שמשובצים בהם הבזקי צבע - סגול-כחול של עין התכלת,</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=186','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">59</a></td>
+                <td class="after">התכלת</td>
+                <td class="after">ותולעת השני עשו בגדי שרד לשרת בקדש | ויעשו את</td>
+                <td class="middle">והארגמן</td>
+                <td class="before"> (1) ומן התכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=130','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">60</a></td>
+                <td class="after">ואז</td>
+                <td class="after">מאלה שאני בקושי מכיר, כמו המשפחה שעברה עכשיו, נחסך הגרוע</td>
+                <td class="middle">בארגמן.</td>
+                <td class="before">פי רוב חניקות ארוכות, ממושכות, פרצופים באדום ואז בסגול ואז</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=144','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">61</a></td>
+                <td class="after">ואחר</td>
+                <td class="after">וצללים סגולים נימרו את השדות המכוסים שלג, ולב אמר: "הארץ</td>
+                <td class="middle">בארגמן,</td>
+                <td class="before">לעבר השקיעה, והשמים נצבעו תחילה בכתום ואז באדום מעושן ואחר</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=33','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">62</a></td>
+                <td class="after">ואת</td>
+                <td class="after">ותכל כל עבודת המשכן אוהל-מועד, ויקימו אותו באחד בחודש: את</td>
+                <td class="middle">הארגמן.</td>
+                <td class="before">וכל הנשים, אשר נשא לבן אותנה טוו את התכלת ואת</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=107','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">63</a></td>
+                <td class="after">ואת</td>
+                <td class="after">ואת השש, ויבוא גם "השני" בתוכם. כשהם חוטאים - חטאיהם</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">ביתה לבוש "שנים". כשישראל עושים משכן ומביאים את התכלת ואת</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=172','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">64</a></td>
+                <td class="after">ואת</td>
+                <td class="after">| ואת תולעת השני ואת השש: (6) ועשו את האפד</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">לכהנו לי: (5) והם יקחו את הזהב ואת התכלת ואת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=179','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">65</a></td>
+                <td class="after">ואת</td>
+                <td class="after">את תולעת השני ואת השש: (26) וכל הנשים אשר נשא</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">חכמת לב בידיה טוו | ויביאו מטוה את התכלת ואת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=194','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">66</a></td>
+                <td class="after">ובגדי</td>
+                <td class="after">שעל מלכי מדין ולבד מן הענקות אשר בצוארי גמליהם: (27)</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">אלף ושבע מאות זהב | לבד מן השהרנים והנטפות ובגדי</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=203','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">67</a></td>
+                <td class="after">ובעצים</td>
+                <td class="after">בתכלת ובבוץ ובכרמיל ולפתח כל פתוח ולחשב כל מחשבת |</td>
+                <td class="middle">בארגמן</td>
+                <td class="before">איש צרי יודע לעשות בזהב ובכסף בנחשת בברזל באבנים ובעצים</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=110','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">68</a></td>
+                <td class="after">ובפרחי</td>
+                <td class="after">הגדולים והיפים מאד. היערה, היערה! דבר שלמה אל לבו, עוד</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">פרגים ), אשר הרהיבו עיני שלמה בפרחי הזהב הקטנים ובפרחי</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=188','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">69</a></td>
+                <td class="after">ובתו</td>
+                <td class="after">ובתוך תולעת השני ובתוך השש | מעשה חשב: (4) כתפת</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">וירקעו את פחי הזהב וקצץ פתילם לעשות בתוך התכלת ובתוך</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=14','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">70</a></td>
+                <td class="after">וזיו</td>
+                <td class="after">שבקצה הרגיע הולך הלוך וחוור, הלוך וכהה. בכל הככר הרחבה</td>
+                <td class="middle">הארגמן</td>
+                <td class="before"> וזיו</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=104','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">71</a></td>
+                <td class="after">וזקנו</td>
+                <td class="after">מעיל משי יורד עד קרסוליו ומגבעת כאגן הסהר על ראשו</td>
+                <td class="middle">כארגמן,</td>
+                <td class="before">על מתניו - מראה המן. השלישי - שער ראשו וזקנו</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=114','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">72</a></td>
+                <td class="after">וילונות</td>
+                <td class="after">שעל החלונות. שם ישבו המהמרים ולמולם ה"דילר". הוא שלף את</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">מתחת למשקופי האלון המגולפים אל שולחנות הבלק-ג'ק הממוקמים ליד וילונות</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=117','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">73</a></td>
+                <td class="after">ומכנסונים</td>
+                <td class="after">מנהיגתן הזהובה מפנה את פניה היפות אלי. שערה הדבשי הארוך,</td>
+                <td class="middle">ארגמניים.</td>
+                <td class="before">להן הדובשניות של קבוצת המעודדות, לבושות חולצות טי ירקרקות ומכנסונים</td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=145','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">74</a></td>
+                <td class="after">ועד</td>
+                <td class="after">העז ביותר, ואי-אלו נוצות של ירק עדיין היו תלויות על</td>
+                <td class="middle">לארגמן</td>
+                <td class="before">מצהוב בהיר ועד זהב עתיק, מן הנחושת החמה ביותר ועד</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=19','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">75</a></td>
+                <td class="after">ועטוף</td>
+                <td class="after">בחיקה, כגמול בין שדיה, את הראש תשא...</td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> ומתחת לתכריך החרב לה חגורה על מתנה, ועטוף</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=108','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">76</a></td>
+                <td class="after">וענני</td>
+                <td class="after">בשלל גונים שונים, אשר שתו סביב עליו, הוסיפו לו לוית</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">ראש הגבעה לבדו עודנו עוטה אור מנגה קרני השמש; וענני</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=48','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">77</a></td>
+                <td class="after">ופתיל</td>
+                <td class="after">על צווארה. ושני בני לויים, אחד מזה ואחד מזה, הנהיגו</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">מעטה לבן כולו וארבע ציציות תכלת בארבע כנפות המעטה ופתיל</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=13','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">78</a></td>
+                <td class="after">ורוד</td>
+                <td class="after">וזרועים בעברי החוטם המוגבה נקודות-חמה, "סובין" דקין-דקיקין; עיניה הכחולות פתוחות</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">כחי"ש היא אומרת ולא רי"ש... פניה הלבנים ענוגים, ממוזגים ורוד</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=148','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">79</a></td>
+                <td class="after">ורוד</td>
+                <td class="after">ולבן מציצים ממקומות המסתור שלהם, בין משטחי הקרח העצומים. בתחילת</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">של הרי סבארת מושלגות. באביב, פרחים עדינים בגוונים של ורוד,</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=44','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">80</a></td>
+                <td class="after">ורקמה</td>
+                <td class="after">ותולעת שני, וצרורי צרורות של נכאת ולוט וצרי וכל ראשי</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">הולכים בצדי גמליהם הטעונים חבילי חבילות של משי, שש ורקמה</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=165','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">81</a></td>
+                <td class="after">ושלשוקלי</td>
+                <td class="after">טוב</td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> שלזהבים ושלשוקלי</td>
+                <td class="citNum">Mishnah</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=75','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">82</a></td>
+                <td class="after">ושש</td>
+                <td class="after">לבושה, וכאשר אחזה לי תעשה אשת המלמד כתורה וכמצוה כי</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">את אשת החיל אשר כפיה תתמכנה פלך ותצפה הליכותביתה ושש</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=167','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">83</a></td>
+                <td class="after">ותכלת</td>
+                <td class="after">ותולעת שני ושש ועזים: (5) וערת אילם מאדמים וערת תחשים</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">התרומה אשר תקחו מאתם | זהב וכסף ונחשת: (4) ותכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=168','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">84</a></td>
+                <td class="after">ותכלת</td>
+                <td class="after">ותלעת שני כרבים מעשה חשב תעשה אתם: (2) ארך היריעה</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">(1) ואת המשכן תעשה עשר יריעת | שש משזר ותכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=177','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">85</a></td>
+                <td class="after">ותכלת</td>
+                <td class="after">ותולעת שני ושש ועזים: (7) וערת אילם מאדמים וערת תחשים</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">יביאה את תרומת יהוה | זהב וכסף ונחשת: (6) ותכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=181','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">86</a></td>
+                <td class="after">ותכלת</td>
+                <td class="after">ותולעת שני כרבים מעשה חשב עשה אתם: (9) ארך היריעה</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">בעשי המלאכה את המשכן עשר יריעת | שש משזר ותכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=192','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">87</a></td>
+                <td class="after">ותכלת</td>
+                <td class="after">ותולעת שני מעשה רקם | כאשר צוה יהוה את משה:</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">מכנסי הבד שש משזר: (29) ואת האבנט שש משזר ותכלת</td>
+                <td class="citNum">Tanach</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=164','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">88</a></td>
+                <td class="after">ותכרי</td>
+                <td class="after">B</td>
+                <td class="middle">ארגמן</td>
+                <td class="before"> עב ארגמן ותכריך</td>
+                <td class="citNum">Mishnah</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=141','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">89</a></td>
+                <td class="after">ותמר</td>
+                <td class="after">שהבעת פניהם מופתעת, מצדה השני. חומה לבנה של לבנים, מטר</td>
+                <td class="middle">ארגמניים,</td>
+                <td class="before">תחומה בשיחים מטופחים של ציפורנים מצדה האחד, ובפרחי אמנון ותמר</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=60','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">90</a></td>
+                <td class="after">זהב</td>
+                <td class="after">רפידתה, ושולמית יושבת וסופקת כפיה, עיניה לנכחה יביטו, על פניה</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">רבים מאירים, ובחדר, אשר היא עתה שם, מטה כבודה, זהב</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=80','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">91</a></td>
+                <td class="after">זהב</td>
+                <td class="after">על פני העתיד, וההרגל ישקנו כוס שכחה לשכוח את כל</td>
+                <td class="middle">וארגמן</td>
+                <td class="before">ולסבול כל עוד נפשו בו, כי תפרש מעטה משבץ זהב</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=102','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">92</a></td>
+                <td class="after">זקנו</td>
+                <td class="after">כמעט החל לצמח, על עצמות לחייו הבולטות מעט שכנה עזות</td>
+                <td class="middle">כארגמן</td>
+                <td class="before">השולחן על מטה כבודה ישב איש עול ימים, שער זקנו</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=49','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">93</a></td>
+                <td class="after">חוט</td>
+                <td class="after">על-פני חוט ארגמן שתי שפתותיה. כשני עפרים תאומים בני צביה</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">אצל אחת. כעדר הקצובות היו, שגלשו מהר הגלעד. וכמו חוט</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=50','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">94</a></td>
+                <td class="after">חוט</td>
+                <td class="after">שתי שפתותיה. כשני עפרים תאומים בני צביה אחת היו שני</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">הקצובות היו, שגלשו מהר הגלעד. וכמו חוט ארגמן על-פני חוט</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=54','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">95</a></td>
+                <td class="after">חוט</td>
+                <td class="after">מושזר כפול שבע, ויהי החוט על צווארו כל הימים. אכן</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">להיות סוכך עליו בכפו, ואמו קשרה לו על צווארו חוט</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=51','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">96</a></td>
+                <td class="after">חוטי</td>
+                <td class="after">עם פרחי תכלת מצומדים אל הקרניים והם מרחפים ברוח. ועל-גבי</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">הרתומים אל העגלה גם הן מצופות זהב נוצץ וקישורי חוטי</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=93','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">97</a></td>
+                <td class="after">חלזו</td>
+                <td class="after">(פורפורשנעקקע) הנמצא על חופי צור.</td>
+                <td class="middle">הארגמן</td>
+                <td class="before">החלזונים (שנעקקען) היפים, חלזוני היבשה וחלזוני המים, וביחוד את חלזון</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=149','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">98</a></td>
+                <td class="after">טורקי</td>
+                <td class="after">ספה מרופדת בבד סאטן אדום דהוי עם רקמת פרחים אוריינטלית,</td>
+                <td class="middle">ארגמני,</td>
+                <td class="before">כורסאות מצויצות, גלובוס על כן פליז, שני טלסקופים, שטיח טורקי</td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=69','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">99</a></td>
+                <td class="after">יהודה</td>
+                <td class="after">הבליטו את חזה-תפארתם הטובל באור וורוד וחיש מהר פשטו את</td>
+                <td class="middle">ארגמן,</td>
+                <td class="before"> ומן המעבר השני, מאחורי השדות, לבשו הרי יהודה</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">100</a></td>
+                <td class="after">יולדת</td>
+                <td class="after">הורד עליה, ובתוך ספסלי קרשים דבוקים במסמרות ונשענים במוטות עץ.</td>
+                <td class="middle">ארגמן</td>
+                <td class="before">כותל המזרחי, הוקמה במת קרשים וכרותות עץ, אשר מסך 'יולדת'</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div class="credits">site maintained by <a href="mailto:justin.parry@mail.utexas.edu">Justin Parry</a>. contact him with
+    any problems or suggestions.
+</div>
+</body>
+</html>

@@ -1,0 +1,1232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>hebrewCorpus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link href="instructionstyles.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        function check() {
+            var error = "false";
+            if (document.searchForm.word.value == "" && document.searchForm.wordAR.value == "") {
+                document.getElementById("searchError1").innerHTML = "search for a word";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.word.value != "" && document.searchForm.wordAR.value != "") {
+                document.getElementById("searchError1").innerHTML = "search for word in ht or arabic";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.pos.value == "---") {
+                document.getElementById("searchError1").innerHTML = "choose pos";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.corpus.value == "") {
+                document.getElementById("searchError1").innerHTML = "choose corpus";
+                return false;
+            }
+            ;
+
+        };
+
+
+        var numHolder = 0;
+
+        function showIns(divId) {
+
+            if (document.getElementById(divId).style.display == "none" || document.getElementById(divId).style.display == false) {
+                //if (numHolder > 1){
+                document.getElementById(divId).style.display = "block";
+                numHolder = 0;
+            } else {
+                document.getElementById(divId).style.display = "none";
+                numHolder = 2;
+            }
+            ;
+
+        };
+
+    </script>
+
+</head>
+
+<body>
+<div>
+    <table class="topBar" cellspacing="0px">
+        <tr>
+            <td>
+                <div class="search">
+
+                    <form name="searchForm" action="search.cgi" method="POST" onSubmit="return check()">
+                        <table class="table2" cellspacing="0px">
+                            <tr>
+                                <td>latin chars &nbsp;&nbsp;<a
+                                        onClick="javascript:window.open('dt.html','window','scrollbars,resizable,dependent,width=400,height=400,left=0,top=0')">(transliteration
+                                    help)</a></td>
+                                <td>hebrew chars</td>
+                                <td>part of speech</td>
+                                <td>subcorpus</td>
+
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><input class="dt" type="TEXT" name="word"></td>
+                                <td rowspan="2"><input class="arabic" type="TEXT" name="wordAR" lang=he size=12></td>
+                                <td>
+                                    <select name="pos">
+                                        <option>---</option>
+                                        <option>noun</option>
+                                        <option>adj</option>
+                                        <option>adv</option>
+                                        <option selected="selected">verb</option>
+                                        <option>string</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="corpus">
+                                        <option value="">---</option>
+                                        <option value='ARUTZ'>Arutz 7: 01-06</option>
+                                        <option value='BEGINNEWS'>Beginning Newspapers</option>
+                                        <option value='EREV'>ErevErev: 03-09</option>
+                                        <option value='ARETZ'>Haaretz: 90-91</option>
+                                        <option value='ARET'>Haaretz: 08</option>
+                                        <option value='MAAR'>Maariv: 04-08</option>
+                                        <option value='RAAN'>Raanana</option>
+                                        <option value='MARKER'>TheMarker: 02</option>
+                                        <option value='YNET'>Ynet: 00-09</option>
+                                        <option value='ALLNEWS' selected="selected">--All News--</option>
+                                        <option value='TANACH'>Tanach</option>
+                                        <option value='MISHNAH'>Mishnah</option>
+                                        <option value='EARLYFICT'>Early Fiction</option>
+                                        <option value='MODFICTO'>Modern Fiction-Orig: 05-10</option>
+                                        <option value='MODFICTT'>Modern Fiction-Tran: 05-10</option>
+                                        <option value='ALLLIT'>--All Literature--</option>
+                                        <option value='MOVIES'>Movies</option>
+                                        <option value='SPOK'>Spoken</option>
+                                        <option value='TAPUZ'>Tapuz Forums</option>
+                                        <option value='ALLCOLLO'>--All Colloquial--</option>
+                                        <option value='JOURNALS'>Journals</option>
+                                        <option value='KNESSET'>Knesset: 03-05</option>
+                                        <option value='ALLSPEC'>--All Specialized--</option>
+                                        <option value='WIKIBOOKS'>Wikibooks</option>
+                                        <option value='WIKINEWS'>Wikinews</option>
+                                        <option value='WIKIPEDIA'>Wikipedia</option>
+                                        <option value='WIKIQUOTE'>Wikiquote</option>
+                                        <option value='WIKISOURCE'>Wikisource</option>
+                                        <option value='ALLWIKI'>--All Wiki Pages--</option>
+                                        <option value='ALLGENRES'>>>ALL GENRES<<</option>
+
+                                    </select>
+                                    <input type="submit" value="submit">
+                                    <div class="searchMessage" id="searchError1"></div>
+
+                                    <div class="right"><a href="searchAdvanced.php?page_type=lookup">advanced search</a>
+                                    </div>
+                                </td>
+                                <td class="instructions"><a
+                                        onClick="javascript:window.open('instructions.php','window','scrollbars,resizable,dependent,width=750,height=600,left=0,top=0')">instructions</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <span class="vowels"><input type='text' name=userID value="1281">trywhat. </span>
+                    </form>
+
+                </div>
+            </td>
+            <td class="titlebar">
+                hebrewCorpus
+                <h2>search tool for students and scholars</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="menu" colspan="2">
+										<span class="searched_word">
+							search results for <span class="wordSearched">rHwb,rwHwb,rHwb</span> | <span
+                                                class="wordSearched">רחוב,רוחוב,רחוב</span> in --All News--						</span>
+                <span class="menuTitle"><a href="?page=results" class="menuLink">summary</a></span>
+                <span class="menuTitle"><a href="?page=citations&sort=rBeforeW&start=1"
+                                           class="menuLink">citations</a></span>
+                <span class="menuTitle"><a href="?page=subsections" class="menuLink">subsections</a></span>
+                <span class="menuTitle"><a href="?page=wordForms" class="menuLink">word forms</a></span>
+                <span class="menuTitle"><a href="?page=wordBefAft" class="menuLink">words before/after</a></span>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+<div class="main">
+    <div class="logedIn">logged in as: Nadav</div>
+    <div class="mainResults">
+
+
+        <div class="pageTitle">citations</div>
+        <div class="pageSub">showing 101 through 200 of 3,753 &mdash; sorted by word before
+            <div class="sort"><a href="?page=citations&sort=rAfterW&start=1">sort by word after</a></div>
+            click on number at left for full citation
+        </div>
+        <div class="goTo">go to page : <a href="?page=citations&sort=rBeforeW&start=1">1</a> | <span
+                class="gray">2</span> | <a href="?page=citations&sort=rBeforeW&start=3">3</a> | <a
+                href="?page=citations&sort=rBeforeW&start=4">4</a> | <a
+                href="?page=citations&sort=rBeforeW&start=5">5</a> | <a
+                href="?page=citations&sort=rBeforeW&start=6">6</a> | <a
+                href="?page=citations&sort=rBeforeW&start=7">7</a> | <a
+                href="?page=citations&sort=rBeforeW&start=8">8</a> | <a
+                href="?page=citations&sort=rBeforeW&start=9">9</a> | <a
+                href="?page=citations&sort=rBeforeW&start=10">10</a> | <a href="?page=citations&sort=rBeforeW&start=11">11</a>
+            | <a href="?page=citations&sort=rBeforeW&start=12">12</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=13">13</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=14">14</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=15">15</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=16">16</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=17">17</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=18">18</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=19">19</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=20">20</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=21">21</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=22">22</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=23">23</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=24">24</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=25">25</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=26">26</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=27">27</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=28">28</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=29">29</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=30">30</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=31">31</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=32">32</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=33">33</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=34">34</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=35">35</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=36">36</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=37">37</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=38">38</a> |
+        </div>
+        <table>
+            <tr>
+                <th></th>
+                <th>sort word</th>
+                <th class="right">10 words after</th>
+                <th class="middle">word</th>
+                <th class="left">10 words before</th>
+                <th class="category"><a href="?page=citations&sort=rBeforeW&start=2&reference=TRUE">subsection (click to
+                    see reference)</a></th>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=631','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">101</a></td>
+                <td class="after"></td>
+                <td class="after">סלמה פינת שדרות ירושלים. 23:00, שלושים שקל בלבד.</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הזוי - "התיבה של אנסמבל המאה ה-21". חצרות יפו -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=633','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">102</a></td>
+                <td class="after"></td>
+                <td class="after">גולומב 52</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> : ב-H.I.T. המכון טכנולוגי חולון -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=636','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">103</a></td>
+                <td class="after"></td>
+                <td class="after">מונטיפיורי 30, ת"א</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> :</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=638','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">104</a></td>
+                <td class="after"></td>
+                <td class="after">אחד העם 60</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> תערוכה קבוצתית תחת הכותרת "נייר" -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=640','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">105</a></td>
+                <td class="after"></td>
+                <td class="after">הרכב 13, תל-אביב</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> : ברזילי -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=651','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">106</a></td>
+                <td class="after"></td>
+                <td class="after">שביל המרץ 3, מאחורי רחוב שוקן.</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> ,</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=840','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">107</a></td>
+                <td class="after"></td>
+                <td class="after">הנביאים באנגלית; 11 בינואר 08:00 - למיטיבי לכת להר הרוח</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הטבע מציעה את הסיורים המודרכים הבאים: ב-7 לינואר, 15:00 -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=847','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">108</a></td>
+                <td class="after"></td>
+                <td class="after">Albert Cuyp בקטע שבין הרחובות Ferdinand Bol ו-Van Wou</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> :</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=852','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">109</a></td>
+                <td class="after"></td>
+                <td class="after">אתיופיה; 19/2 בשעה 15:00 - עמדת תורג'מן, קו התפר, אמריקן</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הטבע מציעה את הסיורים המודרכים הבאים: 18/2 בשעה 15:30 -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=855','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">110</a></td>
+                <td class="after"></td>
+                <td class="after">קפלן יהפוך במהלך החגיגות לשער הכניסה לעיר, וייבנו בו שני</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> :</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=858','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">111</a></td>
+                <td class="after"></td>
+                <td class="after">הנביאים; 6/3 15:30 - הגן הבוטני בהר הצופים; 7/3 בשעה</td>
+                <td class="middle">רחוב</td>
+                <td class="before">בעיר מציעה את הסיורים המודרכים הבאים: 3/3 בשעה 15:30 -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=867','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">112</a></td>
+                <td class="after"></td>
+                <td class="after"></td>
+                <td class="middle">רחוב</td>
+                <td class="before"> מילאנו -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=979','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">113</a></td>
+                <td class="after"></td>
+                <td class="after">קינג ג'ורג' 44, מרכז העיר; בית הכנסת הדתי לאומי, רחוב</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> ,</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1009','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">114</a></td>
+                <td class="after"></td>
+                <td class="after">אחווה 10, נווה צדק, ת"א. הכניסה חינם</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> ,</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1018','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">115</a></td>
+                <td class="after"></td>
+                <td class="after">אחווה 10, תל אביב. כניסה חופשית. פרטים בטלפון 03-5172227.</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> ,</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1020','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">116</a></td>
+                <td class="after"></td>
+                <td class="after">לבונטין 9. קומה 1. טל - 5601225. פרטים ב</td>
+                <td class="middle">רחוב</td>
+                <td class="before">ברפואה סינית. שבת, מ-09:00 עד 12:00. מחיר: 80 שקל .</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1045','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">117</a></td>
+                <td class="after"></td>
+                <td class="after">לא רע לרכישת גיטרות ומסעדות סיניות מסורתיות), שם ממוקמת החנות</td>
+                <td class="middle">רחוב</td>
+                <td class="before">בצד ימין של הרחוב אם מגיעים מרחוב גולו דונדג'י -</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1108','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">118</a></td>
+                <td class="after"></td>
+                <td class="after">המייסדים פינת פרדס משותף). בחריצות ובמסירות רבה עבד ברוך בפרדסו</td>
+                <td class="middle">רחוב</td>
+                <td class="before">נישואיהם הקימו את ביתם ברעננה ונטעו פרדס בחלקתם (כיום -</td>
+                <td class="citNum">raanana</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1128','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">119</a></td>
+                <td class="after"></td>
+                <td class="after">התקומה מהוה כביש גישה לשכונת הפרק. כיום רכב שנוסע מהפרק</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> ברנרד מורדכי - שינוי בתנועה ==================</td>
+                <td class="citNum">raanana</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1139','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">120</a></td>
+                <td class="after"></td>
+                <td class="after">מגדל היום ). הרבה פגישות נרגשות בין תושבים ותיקים לבין</td>
+                <td class="middle">רחוב</td>
+                <td class="before">ניצולי שואה, אשר הגיעו בחוסר כל ושוכנו במחנה העולים (</td>
+                <td class="citNum">raanana</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1145','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">121</a></td>
+                <td class="after"></td>
+                <td class="after">ויצמן בצפון והרחובות פרדס משותף, הפרחים ודרך הפארק בדרום. במזרח</td>
+                <td class="middle">רחוב</td>
+                <td class="before">360 מטר, עובר לאורך צירי הרוחב בהיקפה של רעננה -</td>
+                <td class="citNum">raanana</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1180','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">122</a></td>
+                <td class="after"></td>
+                <td class="after">הראשי של קריית - חיים . שם החלו לשאוג ,</td>
+                <td class="middle">רחובה</td>
+                <td class="before">, לאחר שהשתכרו , יצאו לשדרות אח"י - אילת ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1181','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">123</a></td>
+                <td class="after"></td>
+                <td class="after">מוארים ושמשות ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">- חיים . שם החלו לשאוג , לנפץ שלטי -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1183','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">124</a></td>
+                <td class="after"></td>
+                <td class="after">הגיבורים חדרה , עד 21 ) , למפרץ הסיני ומצוקי</td>
+                <td class="middle">רחוב</td>
+                <td class="before">חפר ) , לחאן וליער חדרה ( היציאה מהחאן ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1190','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">125</a></td>
+                <td class="after"></td>
+                <td class="after">ירמיהו , סמוך לבית חרושת ידוע המייצר נעליים . במסלול</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> . 71 . המקום : ירושלים ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1192','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">126</a></td>
+                <td class="after"></td>
+                <td class="after">לוקר אינו רחוב יוקרה , אך גם לא רחוב מצוקה</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> השם אינו אומר דבר .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1203','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">127</a></td>
+                <td class="after"></td>
+                <td class="after">שומשום " ושרואה את הסרט התיעודי כתוכנית משעממת שמקרינים בטלוויזיה</td>
+                <td class="middle">רחוב</td>
+                <td class="before">ואני " פונה לדור שגדל על סרטוני פרסומת ועל "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1206','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">128</a></td>
+                <td class="after"></td>
+                <td class="after">רמת הגולן 32 ירושלים , אינה אלא כתובת משרדי תנועת</td>
+                <td class="middle">רחוב</td>
+                <td class="before">ובה רשימה של עשרות ישובים . הכתובת המצוינת בחוברת ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1207','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">129</a></td>
+                <td class="after"></td>
+                <td class="after">רמת הגולן 32 ירושלים , אינה אלא כתובת משרדי תנועת</td>
+                <td class="middle">רחוב</td>
+                <td class="before">ובה רשימה של עשרות ישובים . הכתובת המצוינת בחוברת ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1214','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">130</a></td>
+                <td class="after"></td>
+                <td class="after">ירמיהו , סמוך לבית חרושת ידוע המייצר נעליים . במסלול</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> השעה 33 . 71 . המקום : ירושלים ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1227','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">131</a></td>
+                <td class="after"></td>
+                <td class="after">. הם חוזרים למחרת לביתם ברווח גדול . קטיה אישרה</td>
+                <td class="middle">רחוב</td>
+                <td class="before">שתיים טעונות פרי גנם , ולמכור את מרכולתם בקרן -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1232','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">132</a></td>
+                <td class="after"></td>
+                <td class="after">הרכבת , לדוגמה , הפך לרחוב אחד במאי או לרחוב</td>
+                <td class="middle">רחוב</td>
+                <td class="before">מיד עם שובו . שמות רחובות שונו כמה פעמים .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1238','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">133</a></td>
+                <td class="after"></td>
+                <td class="after">אורך ראשי בירושלים בתקופת בית שני ובתקופות הרומית והביזאנטית .</td>
+                <td class="middle">רחוב</td>
+                <td class="before">מגיעים כעבור שתי דקות הליכה ללב הרובע היהודי הקרדו ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1239','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">134</a></td>
+                <td class="after"></td>
+                <td class="after">כ05 אלף תושבים והחליטו באסיפה , על ייסוד מפלגה אופוזיציונית</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> התכנסו בטיראנה הבירה באסיפת -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1250','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">135</a></td>
+                <td class="after"></td>
+                <td class="after">מרסי " , שבו בולט מגעו הקטיפתי של המפיק המוסיקלי</td>
+                <td class="middle">רחוב</td>
+                <td class="before">אלבום האולפן החמישי והמסחרי ביותר , אפשר לשמוע את "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1255','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">136</a></td>
+                <td class="after"></td>
+                <td class="after">האורגים 5 באיזור התעשיה בחולון ) . טיפסתי בזריזות במדרגות</td>
+                <td class="middle">רחוב</td>
+                <td class="before">לעמודים אצלי בבית . המקום הנבחר הוא מועדון בלרי (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1256','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">137</a></td>
+                <td class="after"></td>
+                <td class="after">האורגים 5 באיזור התעשיה בחולון ) . טיפסתי בזריזות במדרגות</td>
+                <td class="middle">רחוב</td>
+                <td class="before">לעמודים אצלי בבית . המקום הנבחר הוא מועדון בלרי (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1261','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">138</a></td>
+                <td class="after"></td>
+                <td class="after">הראשי , דרך הנשיאים , הוא אוטוסטרדה שלאורכה שיכונים עלובי</td>
+                <td class="middle">רחובה</td>
+                <td class="before">- שבע נבנתה על - ידי מוסדות ממשלתיים והסתדרותיים .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1265','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">139</a></td>
+                <td class="after"></td>
+                <td class="after">בייקר מוספר כמה פעמים מאז ימי הבלש האגדי . בפעם</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הדואר הבריטי היא לאיזו כתובת להביא את המכתבים האלה .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1269','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">140</a></td>
+                <td class="after"></td>
+                <td class="after">בעריה השחורות של נאטאל . עוד עמד מנדלה בתוקף על</td>
+                <td class="middle">רחוב</td>
+                <td class="before">. ב27 השעות האחרונות נהרגו יותר מ05 איש בקרבות -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1287','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">141</a></td>
+                <td class="after"></td>
+                <td class="after">אלנבי לרחוב שושן הבירה , ליליינבלום לרחוב חכמים יודעי העתים</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הרגילים . כך הפך רחוב העלייה לרחוב שומר הסף ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1288','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">142</a></td>
+                <td class="after"></td>
+                <td class="after">אחד העם לרחוב איש יהודי , רחוב מאז"ה לרחוב מה</td>
+                <td class="middle">רחוב</td>
+                <td class="before">לרחוב שושן הבירה , ליליינבלום לרחוב חכמים יודעי העתים ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1289','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">143</a></td>
+                <td class="after"></td>
+                <td class="after">מאז"ה לרחוב מה - זה ועל מה זה , רחוב</td>
+                <td class="middle">רחוב</td>
+                <td class="before">יודעי העתים , רחוב אחד העם לרחוב איש יהודי ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1290','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">144</a></td>
+                <td class="after"></td>
+                <td class="after">ביאליק לרחוב אשר העם חפץ ביקרו , רחוב הירקון לרחוב</td>
+                <td class="middle">רחוב</td>
+                <td class="before">רחוב מאז"ה לרחוב מה - זה ועל מה זה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1291','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">145</a></td>
+                <td class="after"></td>
+                <td class="after">הירקון לרחוב האחשתרנים ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">זה , רחוב ביאליק לרחוב אשר העם חפץ ביקרו ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1294','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">146</a></td>
+                <td class="after"></td>
+                <td class="after">) קשייבה ואוליצה ונסקה ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">במקום ושאלות אל עוברים ושבים איתר הנהג את אוליצה (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1297','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">147</a></td>
+                <td class="after"></td>
+                <td class="after">24 " ( 684 , 3 הופעות ) ו"הו כלכותה</td>
+                <td class="middle">רחוב</td>
+                <td class="before">המקהלה " אי פעם . אחר כך עבר את "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1300','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">148</a></td>
+                <td class="after"></td>
+                <td class="after">האוניברסיטה 24 , תל - אביב . קפמאפרק000 , 000</td>
+                <td class="middle">רחוב</td>
+                <td class="before">. אפשר לקבל את החוברת חינם במכון התקנים הישראלי ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1302','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">149</a></td>
+                <td class="after"></td>
+                <td class="after">בכל עיר מרכזית , ולא פחות מ03 מתכוני עוף שהותכנו</td>
+                <td class="middle">רחוב</td>
+                <td class="before">פי הסטנדרד הצרפתי : על שמו קרויה תחנת מטרו ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1303','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">150</a></td>
+                <td class="after"></td>
+                <td class="after">אבן - גבירול ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">השלכות על צמתים מרכזיים באזור , כמו דרך חיפה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1319','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">151</a></td>
+                <td class="after"></td>
+                <td class="after">בן יהודה מסתיים ביצירת מפגש עם קצה רחוב דיזנגוף .</td>
+                <td class="middle">רחוב</td>
+                <td class="before">אך גם מהזנחה גרידא . את שניהם אפשר לשפר .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1328','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">152</a></td>
+                <td class="after"></td>
+                <td class="after">קינג גורג בתל - אביב היה כבר ריק לחלוטין ובאוויר</td>
+                <td class="middle">כשרחוב</td>
+                <td class="before"> ביום חמישי בערב ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1332','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">153</a></td>
+                <td class="after"></td>
+                <td class="after">לואיזן פינת שלינג . בעלת החנות היא גרטרוד שטדלר ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">המבקרים במינכן יכולים לבקר בבית - הבובות ב - ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1337','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">154</a></td>
+                <td class="after"></td>
+                <td class="after">המלך מיכאל , מרכז קניות אטרקטיווי עם חזית אחידה מסוגננת</td>
+                <td class="middle">רחוב</td>
+                <td class="before">עוברת בלגרד תהליך החייאה ושימור . למדרחוב הראשי שלה ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1338','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">155</a></td>
+                <td class="after"></td>
+                <td class="after">בנימיני 5 , תל אביב . טלפון 36781230 . קפמאפרקשעון</td>
+                <td class="middle">רחוב</td>
+                <td class="before">05 ו56 שקל ניתן להשיג באיגוד סי - אף ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1340','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">156</a></td>
+                <td class="after"></td>
+                <td class="after">האושר מספר ארבע " , מאת דורית רואר ( רכגולד</td>
+                <td class="middle">רחוב</td>
+                <td class="before">מאת נורית זרחי ( מסדה , 6891 ) ; "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1342','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">157</a></td>
+                <td class="after"></td>
+                <td class="after">אגריפס " ניתן במשותף למוזיאון ישראל ותל - אביב .</td>
+                <td class="middle">רחוב</td>
+                <td class="before">האמנים עצמם , ואפילו בניהם . ציורו של ארוך "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1345','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">158</a></td>
+                <td class="after"></td>
+                <td class="after">למכירת עיתונים . מארק ומרינה , שבאו מטשקנט לפני חודש</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> אם יש בארץ מכונות -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1357','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">159</a></td>
+                <td class="after"></td>
+                <td class="after">רודיאו הוא רחוב החנויות האלגנטיות בעיר , שבהן פועלים המפורסמים</td>
+                <td class="middle">רחוב</td>
+                <td class="before">בחנויות מפות מעודכנות , שבהן מסומנים מסלולי הטיול בשכונות .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1361','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">160</a></td>
+                <td class="after"></td>
+                <td class="after">הפרחים , רחוב תלול מפותל וצר , משובץ בערוגות פרחים</td>
+                <td class="middle">רחוב</td>
+                <td class="before">תיירותי ובו חנויות רבות , מופעי רחוב ושלל דוכנים ;</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1362','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">161</a></td>
+                <td class="after"></td>
+                <td class="after">תלול מפותל וצר , משובץ בערוגות פרחים ענקיות . גם</td>
+                <td class="middle">רחוב</td>
+                <td class="before">רבות , מופעי רחוב ושלל דוכנים ; רחוב הפרחים ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1363','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">162</a></td>
+                <td class="after"></td>
+                <td class="after">קסטרו , הראוי לביקור , הוא רחוב ההומוסקסואלים . בשעות</td>
+                <td class="middle">רחוב</td>
+                <td class="before">גבעה שעליה מצויה מרפסת תצפית פנוראמית המשקיפה על העיר .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1365','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">163</a></td>
+                <td class="after"></td>
+                <td class="after">מעניין נוסף הוא , סמוך לאוניברסיטת סן פרנסיסקו . אתרים</td>
+                <td class="middle">רחוב</td>
+                <td class="before">. יש בו בתי קפה רבים , מועדונים ובוטיקים .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1368','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">164</a></td>
+                <td class="after"></td>
+                <td class="after">חירותנו , שחוצה את שכונת התקוה , הופך למדרחוב ויהווה</td>
+                <td class="middle">רחוב</td>
+                <td class="before">גם הכנה למגרש כדורגל מדושא ומגרש חנייה ל052 מכוניות .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1373','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">165</a></td>
+                <td class="after"></td>
+                <td class="after">לוטוס , להראות להם שיקום פיזי שנעשה שם . זה</td>
+                <td class="middle">רחוב</td>
+                <td class="before">המתארחים בעיר . " הוא לוקח אותם לרחוב אחד ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1374','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">166</a></td>
+                <td class="after"></td>
+                <td class="after">אמודאי ) , באר - שבע ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">בסכום של 8 מיליון דולר . נמכרו קרקעות בירושלים (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1387','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">167</a></td>
+                <td class="after"></td>
+                <td class="after">טוורצקאיה " . הרחוב נשא שם זה עד לשנת 2391</td>
+                <td class="middle">רחוב</td>
+                <td class="before">אל הככר האדומה . הרחוב יקבל את שמו הקודם "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1388','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">168</a></td>
+                <td class="after"></td>
+                <td class="after">תל - מאנה 04 , חיפה .</td>
+                <td class="middle">רחוב</td>
+                <td class="before">תיעול ופיתוח בע"ם , וכתובתה זהה לכתובת של קרביץ :</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1389','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">169</a></td>
+                <td class="after"></td>
+                <td class="after">" המתוכנן להיבנות לקראת התערוכה . ב"רחוב " יוצגו ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הבתים המוכנים שכבר הוקם בשטח , במסגרת קומפלקס של "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1403','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">170</a></td>
+                <td class="after"></td>
+                <td class="after">. סוויסה יוצר סגנון מלא הומור , שלא היה אצל</td>
+                <td class="middle">רחוב</td>
+                <td class="before">סוויסה תערובת מקורית של נער - ישיבה לשעבר ונער -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1405','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">171</a></td>
+                <td class="after"></td>
+                <td class="after">הגיא ( אל - ואד ) חוצה את שוליו המערביים</td>
+                <td class="middle">רחוב</td>
+                <td class="before">אל - חאלדי , שנורה בשוק שליד כנסיית הקבר .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1415','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">172</a></td>
+                <td class="after"></td>
+                <td class="after">נוה - שאנן ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">תוכל להכניס לה על פי ההערכה כ21 מיליון דולר .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1420','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">173</a></td>
+                <td class="after"></td>
+                <td class="after">סומסום " . הוא משלב את דמויות הסדרה בהגדרות הוויזואליות</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1434','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">174</a></td>
+                <td class="after"></td>
+                <td class="after">יהודה הלוי ( חלקית ) , ובדרוממערב :</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הם בצפון : שדרות בנציון ורחוב בוגרשוב , במזרח :</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1436','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">175</a></td>
+                <td class="after"></td>
+                <td class="after">בן - יהודה ( חלקית ) . מטרות התוכנית ,</td>
+                <td class="middle">ורחוב</td>
+                <td class="before"> רחוב אלנבי ( חלקית )</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1441','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">176</a></td>
+                <td class="after"></td>
+                <td class="after">, המלהגים דברי - עוועים אינפטיליים על גזע , דם</td>
+                <td class="middle">רחוב</td>
+                <td class="before">הנראים לכל בר - דעת כקריקטורה של ראשי כנופיות -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1444','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">177</a></td>
+                <td class="after"></td>
+                <td class="after">יהודה הלוי 31 , ת"א 000 , 07 ש"ח ;</td>
+                <td class="middle">רחוב</td>
+                <td class="before">עוד ברשימת מקבלי ההקצבות : " היכל תלמוד " ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1445','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">178</a></td>
+                <td class="after"></td>
+                <td class="after">דבורה הנביאה 18 תא 000 , 031 ש"ח ; "</td>
+                <td class="middle">רחוב</td>
+                <td class="before">000 , 07 ש"ח ; " תורת משה " ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1446','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">179</a></td>
+                <td class="after"></td>
+                <td class="after">שחל 4 000 , 53 ש"ח ; " אורות קהילות</td>
+                <td class="middle">רחוב</td>
+                <td class="before">000 , 031 ש"ח ; " מעין פנינה " ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1458','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">180</a></td>
+                <td class="after"></td>
+                <td class="after">בין אוהדי קבוצות מאנהיים ופורטונה דיסלדורף , שניצחה 10 .</td>
+                <td class="middle">רחוב</td>
+                <td class="before">נאלצה המשטרה לעצור 57 אוהדי כדורגל , בעקבות קרבות -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1462','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">181</a></td>
+                <td class="after"></td>
+                <td class="after">בין אוהדי קבוצות מאנהיים ופורטונה דיסלדורף , שניצחה 10 .</td>
+                <td class="middle">רחוב</td>
+                <td class="before">נאלצה המשטרה לעצור 57 אוהדי כדורגל , בעקבות קרבות -</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1463','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">182</a></td>
+                <td class="after"></td>
+                <td class="after">סירקין ) , תוכננו בקפדנות חודש ימים מראש . עובדה</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> מדוע ? הרי העבודות להחלפת הצנרת באותו מקום (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1474','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">183</a></td>
+                <td class="after"></td>
+                <td class="after">קירב , את תחנת הרכבת " לנינו " , את</td>
+                <td class="middle">רחוב</td>
+                <td class="before">איפוא את שיכוני " פרוספקט מרקס " , את "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1482','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">184</a></td>
+                <td class="after"></td>
+                <td class="after">הבנקים " בבירה . הפרויקט אליו עובר הבנק ,</td>
+                <td class="middle">רחוב</td>
+                <td class="before">שלו בירושלים , והממוקמים כעת בשכירות ברחוב הלל , "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1497','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">185</a></td>
+                <td class="after"></td>
+                <td class="after">מאייסלובה , ליד המסעדה היהודית הכשרה .</td>
+                <td class="middle">רחוב</td>
+                <td class="before">01 בבוקר יוצאים טיולים מודרכים בנושאים יהודיים ממרכז פראג ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1499','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">186</a></td>
+                <td class="after"></td>
+                <td class="after">, מזור , שוהם וכפר - רות . הוחלט על</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> נתן ,</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1521','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">187</a></td>
+                <td class="after"></td>
+                <td class="after">סטלין ללא מוצא " , או " רחוב ברזנייב ללא</td>
+                <td class="middle">רחוב</td>
+                <td class="before">רחובות רבים ללא מוצא . יש לקרוא להם : "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1522','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">188</a></td>
+                <td class="after"></td>
+                <td class="after">ברזנייב ללא מוצא " . שמות כאלה ישמשו בו -</td>
+                <td class="middle">רחוב</td>
+                <td class="before">: " רחוב סטלין ללא מוצא " , או "</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1523','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">189</a></td>
+                <td class="after"></td>
+                <td class="after">המאה ואחד , שכונת רמת - חן ) בחסות ראש</td>
+                <td class="middle">רחוב</td>
+                <td class="before">יהיה באולם הספורט של תיכון בליך ברמת - גן (</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1559','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">190</a></td>
+                <td class="after"></td>
+                <td class="after">פרישמן, במערב - רחוב הירקון, ובמזרח - רחוב אבן גבירול.</td>
+                <td class="middle">רחוב</td>
+                <td class="before">וקטנועים בגבולות המתחם הבא: בצפון - שדרות רוקח, בדרום -</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1560','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">191</a></td>
+                <td class="after"></td>
+                <td class="after">הירקון, ובמזרח - רחוב אבן גבירול.</td>
+                <td class="middle">רחוב</td>
+                <td class="before">בצפון - שדרות רוקח, בדרום - רחוב פרישמן, במערב -</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1561','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">192</a></td>
+                <td class="after"></td>
+                <td class="after">אבן גבירול.</td>
+                <td class="middle">רחוב</td>
+                <td class="before">בדרום - רחוב פרישמן, במערב - רחוב הירקון, ובמזרח -</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1695','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">193</a></td>
+                <td class="after"></td>
+                <td class="after">מדיין 5</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> -</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1699','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">194</a></td>
+                <td class="after"></td>
+                <td class="after">יהל 15, מערב 6.</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> -</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1700','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">195</a></td>
+                <td class="after"></td>
+                <td class="after">דקר 5, מערב 7.</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> -</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1701','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">196</a></td>
+                <td class="after"></td>
+                <td class="after">יעלים 39, שכונה א'.</td>
+                <td class="middle">רחוב</td>
+                <td class="before"> -</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2016','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">197</a></td>
+                <td class="after"></td>
+                <td class="after">בעצם, המטרה של התערוכה היא להרגיש עד כמה שיותר איך</td>
+                <td class="middle">רחוב.</td>
+                <td class="before">הוא משהו אחר. אחד כאילו שוק, השני פארק, והשלישי -</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2069','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">198</a></td>
+                <td class="after"></td>
+                <td class="after">מבולבל, לא דא ולא הא. היו לו תביעות לעשירות, הוא</td>
+                <td class="middle">רחוב</td>
+                <td class="before">העיר וכותב בחיבה רבה על בתי הקפה: "רחוב יקטרינה -</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2210','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">199</a></td>
+                <td class="after"></td>
+                <td class="after">סוקולוב רחוק מלהגשים את תקוות התושבים ובעלי העסקים. המבנים בו</td>
+                <td class="middle">רחוב</td>
+                <td class="before">השיפוצים - שכללו הקמת כיכרות, החלפת מדרכות ושתילת עצים -</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2213','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">200</a></td>
+                <td class="after"></td>
+                <td class="after">המסגר.</td>
+                <td class="middle">רחוב</td>
+                <td class="before">מחליף אולם מרווח יותר, אך באזור אופנתי מעט פחות -</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div class="credits">site maintained by <a href="mailto:justin.parry@mail.utexas.edu">Justin Parry</a>. contact him with
+    any problems or suggestions.
+</div>
+</body>
+</html>

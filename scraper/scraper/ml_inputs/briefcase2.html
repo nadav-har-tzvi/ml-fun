@@ -1,0 +1,1198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>hebrewCorpus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link href="instructionstyles.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        function check() {
+            var error = "false";
+            if (document.searchForm.word.value == "" && document.searchForm.wordAR.value == "") {
+                document.getElementById("searchError1").innerHTML = "search for a word";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.word.value != "" && document.searchForm.wordAR.value != "") {
+                document.getElementById("searchError1").innerHTML = "search for word in ht or arabic";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.pos.value == "---") {
+                document.getElementById("searchError1").innerHTML = "choose pos";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.corpus.value == "") {
+                document.getElementById("searchError1").innerHTML = "choose corpus";
+                return false;
+            }
+            ;
+
+        };
+
+
+        var numHolder = 0;
+
+        function showIns(divId) {
+
+            if (document.getElementById(divId).style.display == "none" || document.getElementById(divId).style.display == false) {
+                //if (numHolder > 1){
+                document.getElementById(divId).style.display = "block";
+                numHolder = 0;
+            } else {
+                document.getElementById(divId).style.display = "none";
+                numHolder = 2;
+            }
+            ;
+
+        };
+
+    </script>
+
+</head>
+
+<body>
+<div>
+    <table class="topBar" cellspacing="0px">
+        <tr>
+            <td>
+                <div class="search">
+
+                    <form name="searchForm" action="search.cgi" method="POST" onSubmit="return check()">
+                        <table class="table2" cellspacing="0px">
+                            <tr>
+                                <td>latin chars &nbsp;&nbsp;<a
+                                        onClick="javascript:window.open('dt.html','window','scrollbars,resizable,dependent,width=400,height=400,left=0,top=0')">(transliteration
+                                    help)</a></td>
+                                <td>hebrew chars</td>
+                                <td>part of speech</td>
+                                <td>subcorpus</td>
+
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><input class="dt" type="TEXT" name="word"></td>
+                                <td rowspan="2"><input class="arabic" type="TEXT" name="wordAR" lang=he size=12></td>
+                                <td>
+                                    <select name="pos">
+                                        <option>---</option>
+                                        <option selected="selected">noun</option>
+                                        <option>adj</option>
+                                        <option>adv</option>
+                                        <option>verb</option>
+                                        <option>string</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="corpus">
+                                        <option value="">---</option>
+                                        <option value='ARUTZ'>Arutz 7: 01-06</option>
+                                        <option value='BEGINNEWS'>Beginning Newspapers</option>
+                                        <option value='EREV'>ErevErev: 03-09</option>
+                                        <option value='ARETZ'>Haaretz: 90-91</option>
+                                        <option value='ARET'>Haaretz: 08</option>
+                                        <option value='MAAR'>Maariv: 04-08</option>
+                                        <option value='RAAN'>Raanana</option>
+                                        <option value='MARKER'>TheMarker: 02</option>
+                                        <option value='YNET'>Ynet: 00-09</option>
+                                        <option value='ALLNEWS' selected="selected">--All News--</option>
+                                        <option value='TANACH'>Tanach</option>
+                                        <option value='MISHNAH'>Mishnah</option>
+                                        <option value='EARLYFICT'>Early Fiction</option>
+                                        <option value='MODFICTO'>Modern Fiction-Orig: 05-10</option>
+                                        <option value='MODFICTT'>Modern Fiction-Tran: 05-10</option>
+                                        <option value='ALLLIT'>--All Literature--</option>
+                                        <option value='MOVIES'>Movies</option>
+                                        <option value='SPOK'>Spoken</option>
+                                        <option value='TAPUZ'>Tapuz Forums</option>
+                                        <option value='ALLCOLLO'>--All Colloquial--</option>
+                                        <option value='JOURNALS'>Journals</option>
+                                        <option value='KNESSET'>Knesset: 03-05</option>
+                                        <option value='ALLSPEC'>--All Specialized--</option>
+                                        <option value='WIKIBOOKS'>Wikibooks</option>
+                                        <option value='WIKINEWS'>Wikinews</option>
+                                        <option value='WIKIPEDIA'>Wikipedia</option>
+                                        <option value='WIKIQUOTE'>Wikiquote</option>
+                                        <option value='WIKISOURCE'>Wikisource</option>
+                                        <option value='ALLWIKI'>--All Wiki Pages--</option>
+                                        <option value='ALLGENRES'>>>ALL GENRES<<</option>
+
+                                    </select>
+                                    <input type="submit" value="submit">
+                                    <div class="searchMessage" id="searchError1"></div>
+
+                                    <div class="right"><a href="searchAdvanced.php?page_type=lookup">advanced search</a>
+                                    </div>
+                                </td>
+                                <td class="instructions"><a
+                                        onClick="javascript:window.open('instructions.php','window','scrollbars,resizable,dependent,width=750,height=600,left=0,top=0')">instructions</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <span class="vowels"><input type='text' name=userID value="1281">trywhat. </span>
+                    </form>
+
+                </div>
+            </td>
+            <td class="titlebar">
+                hebrewCorpus
+                <h2>search tool for students and scholars</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="menu" colspan="2">
+										<span class="searched_word">
+							search results for <span class="wordSearched">mzwwdh</span> | <span class="wordSearched">מזוודה</span> in --All News--						</span>
+                <span class="menuTitle"><a href="?page=results" class="menuLink">summary</a></span>
+                <span class="menuTitle"><a href="?page=citations&sort=rBeforeW&start=1"
+                                           class="menuLink">citations</a></span>
+                <span class="menuTitle"><a href="?page=subsections" class="menuLink">subsections</a></span>
+                <span class="menuTitle"><a href="?page=wordForms" class="menuLink">word forms</a></span>
+                <span class="menuTitle"><a href="?page=wordBefAft" class="menuLink">words before/after</a></span>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+<div class="main">
+    <div class="logedIn">logged in as: Nadav</div>
+    <div class="mainResults">
+
+
+        <div class="pageTitle">citations</div>
+        <div class="pageSub">showing 1 through 100 of 240 &mdash; sorted by word before
+            <div class="sort"><a href="?page=citations&sort=rAfterW&start=1">sort by word after</a></div>
+            click on number at left for full citation
+        </div>
+        <div class="goTo">go to page : <span class="gray">1</span> | <a
+                href="?page=citations&sort=rBeforeW&start=2">2</a> | <a
+                href="?page=citations&sort=rBeforeW&start=3">3</a> |
+        </div>
+        <table>
+            <tr>
+                <th></th>
+                <th>sort word</th>
+                <th class="right">10 words after</th>
+                <th class="middle">word</th>
+                <th class="left">10 words before</th>
+                <th class="category"><a href="?page=citations&sort=rBeforeW&start=1&reference=TRUE">subsection (click to
+                    see reference)</a></th>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=8','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">1</a></td>
+                <td class="after"></td>
+                <td class="after">הייתה שייכת לאדם שאיני מכיר ממש. מעולם לא דיברתי איתו</td>
+                <td class="middle">"המזוודה</td>
+                <td class="before"></td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=95','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">2</a></td>
+                <td class="after"></td>
+                <td class="after">עברה שיקוף בנתב"ג והאקדח לא אותר</td>
+                <td class="middle">המזוודה</td>
+                <td class="before"></td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=138','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">3</a></td>
+                <td class="after"></td>
+                <td class="after">בדרכו לאנגליה את תרבות ה"סמוך" הישראלית הידועה. "יהיה בסדר, סמוך</td>
+                <td class="middle">למזוודה</td>
+                <td class="before"></td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=180','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">4</a></td>
+                <td class="after"></td>
+                <td class="after">שוחררה . בקיצור , מי שאינו חברת תעופה אסור לו</td>
+                <td class="middle">והמזוודה</td>
+                <td class="before"></td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=176','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">5</a></td>
+                <td class="after"></td>
+                <td class="after">, שאותה נאמר לי לחפש במחלקת האבידות , לא הגיעה</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">רצו לשמוע . אך פה לא תם מסע הייסורים .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=181','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">6</a></td>
+                <td class="after"></td>
+                <td class="after">המיותרת , ללא נוסע , נלקחה ( כפי שמחייבות ובצדק</td>
+                <td class="middle">המזוודה</td>
+                <td class="before"> העלייה למטוס נסגרה ;</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=190','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">7</a></td>
+                <td class="after"></td>
+                <td class="after">הוצאה לאחר שהופקדה בידי חברת התעופה , כל חפציה נבדקו</td>
+                <td class="middle">מזוודתה</td>
+                <td class="before">נעצרה שוב חודשיים לאחר מכן , כשטסה לארצות הברית .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=210','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">8</a></td>
+                <td class="after"></td>
+                <td class="after">שבה הוצפנה פצצה בתוך רדיוטייף נייד הוחדרה כנראה כבר בפראנקפורט</td>
+                <td class="middle">המזוודה</td>
+                <td class="before"> יורק .</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=37','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">9</a></td>
+                <td class="after">א</td>
+                <td class="after">טרם אותרה. המשטרה שוקלת לייבש קטעים מהנחל כדי לסייע בחיפושים.</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">נחל הירקון בסיוע צוללנים, וכן רובוטים תת-ימיים המצוידים במצלמות, אך</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=70','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">10</a></td>
+                <td class="after">א</td>
+                <td class="after">עדיין לא נמצאה, אף שהחוקרים האמינו כי היא נמצאת אי</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">נשלו מהמים פגוש של רכב, קונוס משטרה, תיקים ושקיות, אך</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=109','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">11</a></td>
+                <td class="after">אבידרזיטומירסקי</td>
+                <td class="after">ונסעה לפולין. בין הבגדים הניחה אבידר-ז'יטומירסקי, ציירת מנתניה, כמה תמונות</td>
+                <td class="middle">מזוודה</td>
+                <td class="before"> ב-2001 ארזה נטע אבידר-ז'יטומירסקי</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=31','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">12</a></td>
+                <td class="after">אבל</td>
+                <td class="after">לא נמצאה. בלית ברירה הוא עזב את המקום בתקווה שישלחו</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">המזוודה שלו לא הגיעה. הוא חיכה בשדה התעופה שעתיים אבל</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=139','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">13</a></td>
+                <td class="after">או</td>
+                <td class="after">שאתם שולחים לצ'ק אין. כמה תוכלו לדחוס לתוכו? 20 קילוגרם,</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">אבל זאת האמת, גובה כסף גם על כל תיק או</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=173','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">14</a></td>
+                <td class="after">או</td>
+                <td class="after">עץ קטנה ובתוכה יוגב קברנה סוביניון פטיט ורדו, שמן הלפרן</td>
+                <td class="middle">מזוודת</td>
+                <td class="before">קערת זכוכית לבנה, דפדפי שוקולד, קונפיטורה ואגוזים (124 שקל) או</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=221','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">15</a></td>
+                <td class="after">אובד</td>
+                <td class="after">תתבטא בסכום מסוים מוכפל במספר הקילוגרמים ששוקלת המזוודה . כיום</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">האחריות המירבית של חברת נסיעות במקרה של איחור או אובדן</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=106','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">16</a></td>
+                <td class="after">אוחז</td>
+                <td class="after">לפני שלושה חודשים.</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">יחידות לכל מקום שאזרח כלשהו מדמה לו שראה סבא אוחז</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=187','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">17</a></td>
+                <td class="after">אוחז</td>
+                <td class="after">קטנה שאין הוא מניח אפילו לרגע . כל רכושו במזוודונת</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">המכסה אותו האפיר את צבעו השחור . בידו הוא אוחז</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=188','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">18</a></td>
+                <td class="after">אוחז</td>
+                <td class="after">קטנה שאין הוא מניח אפילו לרגע . כל רכושו במזוודונת</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">המכסה אותו האפיר את צבעו השחור . בידו הוא אוחז</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=153','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">19</a></td>
+                <td class="after">אורז</td>
+                <td class="after">ומחמם מנועים בדרך לניו יורק</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">אוי סנדי, סנדי. שחר ישי, הדני זוקו החדש בשכונה, אורז</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=77','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">20</a></td>
+                <td class="after">אותה</td>
+                <td class="after">לירקון?" הפצצה נפלה. נוכחותה של בתי, עלמה, שהיתה במכונית בדרכה</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">מתוק מאחור. "אבא, למה סבא הרג את הילדה וזרק אותה</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=58','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">21</a></td>
+                <td class="after">אותו</td>
+                <td class="after">לבית משפט", אמר זורוף ל"הארץ" אתמול, "אנחנו פשוט מייצרים כאן</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">"אני לא חושב שאנחנו נמצא אותו כאן ועכשיו ונביא אותו</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=128','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">22</a></td>
+                <td class="after">אותם</td>
+                <td class="after">לידי מפעיליו הישראליים.</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">אוליב, כיצד גנב המרגל הישראלי מסמכים מסווגים ממשרדו, והעביר אותם</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=129','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">23</a></td>
+                <td class="after">אותם</td>
+                <td class="after">גדולה, אותה העביר מאוחר יותר לידי שירותי המודיעין הישראליים.</td>
+                <td class="middle">למזוודה</td>
+                <td class="before">הסרט ממצלמת האבטחה, שתיעד את פולארד גונב מסמכים ומכניס אותם</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=130','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">24</a></td>
+                <td class="after">אותם</td>
+                <td class="after">לידי מפעיליו הישראליים.</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">אוליב, כיצד גנב המרגל הישראלי מסמכים מסווגים ממשרדו, והעביר אותם</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=204','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">25</a></td>
+                <td class="after">אותם</td>
+                <td class="after">ועבר במכס הצרפתי כאילו מדובר במטען רגיל . " הוא</td>
+                <td class="middle">למזוודה</td>
+                <td class="before">הרישומים שקיבל במתנה עבור המוזיאון באופן ספונטני , הכניסה אותם</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=206','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">26</a></td>
+                <td class="after">אותם</td>
+                <td class="after">לחו"ל .</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">בישראל כמה ציורים של ראובן או גוטמן , ויוציא אותם</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=36','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">27</a></td>
+                <td class="after">אחר</td>
+                <td class="after"></td>
+                <td class="middle">המזוודה.</td>
+                <td class="before">לעיני החוקרים את המעשה, בניסיון למקד את חיפושי הצוללנים אחר</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=33','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">28</a></td>
+                <td class="after">איננה</td>
+                <td class="after">ואני אינני נוסע", ניסה דרויש לנסח את המבע הפואטי של</td>
+                <td class="middle">מזוודה</td>
+                <td class="before"> "מולדתי איננה</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=154','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">29</a></td>
+                <td class="after">אית</td>
+                <td class="after"></td>
+                <td class="middle">במזוודה?</td>
+                <td class="before"> מה תיקח איתך</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=160','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">30</a></td>
+                <td class="after">אמריקנים</td>
+                <td class="after">ענקית ואמרו למאבטח במבטא כבד "יש לי רק זה", מאחורינו</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">"נו, שלומי, ת'זיז ת'צמך ותתקדם כבר", לצידנו הרימו כמה אמריקנים</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=211','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">31</a></td>
+                <td class="after">אם</td>
+                <td class="after">זו שייכת לאחד הנוסעים . המזוודות נבדקו בקרני רנטגן בלבד</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">בהיתרו , נמל התעופה של לונדון , לא נבדק אם</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=162','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">32</a></td>
+                <td class="after">אספה</td>
+                <td class="after">קטנה ולקחה אותה למשרד החדש שלה, באיזו אוניברסיטה באמצע ארה"ב,</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">את ראשה בגאווה. היא לא תבכה, היא אמרה. היא אספה</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=208','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">33</a></td>
+                <td class="after">אצלכם</td>
+                <td class="after">? " שואל המוכס את בני - הזוג הצעיר שלפני</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">של מוצרי חשמל יפאניים ואירופיים . קפמאליד4 " מה אצלכם</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=116','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">34</a></td>
+                <td class="after">ארוז</td>
+                <td class="after">לואי ויטון מעוצבת - פרנסיס השתלטן (אוון ווילסון), האח הבכור</td>
+                <td class="middle">במזוודת</td>
+                <td class="before"> כל אחד מהם מגיע עם מטען משלו, ארוז</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=147','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">35</a></td>
+                <td class="after">ארז</td>
+                <td class="after">ויצא לחיות בסן דייגו, בארץ האפשרויות הבלתי מוגבלות. "די, נמאס</td>
+                <td class="middle">מזוודה</td>
+                <td class="before"> כשהיה בן 18, ארז</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=13','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">36</a></td>
+                <td class="after">ארזתי</td>
+                <td class="after">קטנה (בגדי ים ומברשות שינים), ואמרתי לבעל שלא ישאל שאלות</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">הודעתי להורים שהגיעו לביקור שהם נשארים הלילה עם הילדים, ארזתי</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=165','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">37</a></td>
+                <td class="after">ארזתי</td>
+                <td class="after">את כל הבגדים שלי והחלטתי ללכת מפה. אמא שלי אמרה</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">אביבים שלי נעלמו ברגע שהתחיל המשבר שלי. פעם בייאוש ארזתי</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=171','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">38</a></td>
+                <td class="after">ארזתי</td>
+                <td class="after">ונסעתי לניו יורק. סיימתי שם את התיכון בבית ספר של</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">בעולם, לחיות חיי לילה מטורפים, לעבוד עם מעצבים מפורסמים. ארזתי</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=15','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">39</a></td>
+                <td class="after">את</td>
+                <td class="after">עם הכסף. הוא סימן לי עם האקדח שאלך משם, אבל</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">אותו מחזיק ביד אחת שקית עם האקדח וביד שנייה את</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=24','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">40</a></td>
+                <td class="after">את</td>
+                <td class="after">מולם ואמרתי להם שאני כבר לא יכולה, שיקחו את הילד</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">בלתי אפשרית, אז ארזתי לו מזוודה, הלכתי לרווחה, שמתי את</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=25','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">41</a></td>
+                <td class="after">את</td>
+                <td class="after">ולצאת החוצה, לפגוש את מאות ההורים שהגיעו. נשיקות, חיבוקים, שוקולדים,</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">חצי שעה של טיסה ואנחנו באילת. כולם מחכים לקבל את</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=26','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">42</a></td>
+                <td class="after">את</td>
+                <td class="after">החברים\משפחה ונסעו, או יותר נכון, טסו, לביקור קצרצר בחו"ל. היעדים</td>
+                <td class="middle">המזוודת,</td>
+                <td class="before">ועבודה, היו גם כאלה שהחליטו שאילת קטנה עליהם, ארזו את</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=28','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">43</a></td>
+                <td class="after">את</td>
+                <td class="after">ונישקתי לשלום את המשפחה. לא זאת המטרה שלשמה הרחקתי עד</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">זה לא דבר שמתאים לי. לא לזה התכוונתי כשארזתי את</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=32','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">44</a></td>
+                <td class="after">את</td>
+                <td class="after">לכשתמצא וכך היה. אחרי עוד כמה שעות הגיעה סוף סוף</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">בלית ברירה הוא עזב את המקום בתקווה שישלחו לו את</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=35','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">45</a></td>
+                <td class="after">את</td>
+                <td class="after">והתבקש לשחזר לעיני החוקרים את המעשה, בניסיון למקד את חיפושי</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">לנחל הירקון. רון הובא לאתר שבו סיפר לחוקריו שהשליך את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=51','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">46</a></td>
+                <td class="after">את</td>
+                <td class="after">שלו ולבדוק אם יש בה סתם עוד ניירת או אולי</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">קטנות עם גלגלים וידית. התחשק לי לפתוח למישהו מהם את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=59','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">47</a></td>
+                <td class="after">את</td>
+                <td class="after">של אותו נוסע. מטרת תקנה זו היא לוודא שאיש לא</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">לא מאשרות לטיסה להמריא עד שהם מאתרים ומורידים מהמטוס את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=63','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">48</a></td>
+                <td class="after">את</td>
+                <td class="after">למרכז הנחל. הוא בחר בנקודה הזו, הסביר, כי הכיר אותה</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">לפני "קאנטרי דקל", הדגים רון כיצד ירד במדרון והשליך את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=64','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">49</a></td>
+                <td class="after">את</td>
+                <td class="after">חזר לירקון כדי לבקש סליחה מרוז ואף חשב להתאבד במקום.</td>
+                <td class="middle">המזוודה,</td>
+                <td class="before">מפקפקים בטענה זו - ואף התעקש שימים לאחר שזרק את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=66','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">50</a></td>
+                <td class="after">את</td>
+                <td class="after">על מסכי הטלוויזיה המיוחדים. בנוסף, בשל הזיהום הקשה בנחל הירקון,</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">על חפצים שבתוך הנחל, ועל כן יש קושי לזהות את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=67','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">51</a></td>
+                <td class="after">את</td>
+                <td class="after"></td>
+                <td class="middle">המזוודה.</td>
+                <td class="before">את הרובוט עם המצלמה על קרקעית הנחל בניסיון לגלות את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=72','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">52</a></td>
+                <td class="after">את</td>
+                <td class="after">נגע במצלמה התת-ימית בטעות ברגלו והסיט אותה ממקומה. "החיפושים לא</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">שכרה הבחינו במזוודה על קרקעית הנחל, הצוללן שניסה למשות את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=74','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">53</a></td>
+                <td class="after">את</td>
+                <td class="after">שרק לפני שבוע היתה במרחק של שלושה מטרים מתחת לרגליהם</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">התחילו שוב מאפס ביום שלמחרת. "עד עכשיו מחפשים שם את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=84','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">54</a></td>
+                <td class="after">את</td>
+                <td class="after">המשיך רון והסביר כי ראה את המזוודה שטה מהמקום ולכן</td>
+                <td class="middle">המזוודה,</td>
+                <td class="before">לאחר שענה על שאלת החוקרים באשר לנקודה שבה השליך את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=85','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">55</a></td>
+                <td class="after">את</td>
+                <td class="after">שטה מהמקום ולכן הוא יודע שהיא כבר לא נמצאת בנקודה</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">שבה השליך את המזוודה, המשיך רון והסביר כי ראה את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=94','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">56</a></td>
+                <td class="after">את</td>
+                <td class="after">ולעזוב", סיפר מקסים אטיאס מאשקלון ל"הארץ". "במשך שעה חיפשתי את</td>
+                <td class="middle">המזוודה</td>
+                <td class="before"> "אשתי רוצה לקפל את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=104','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">57</a></td>
+                <td class="after">את</td>
+                <td class="after">שאל אותי עובר אורח אם אני זקוקה לעזרה "מותק". "לא</td>
+                <td class="middle">מזוודתי,</td>
+                <td class="before"> לאחר הנחיתה בלונדון, כשהתאמצתי לגרור במדרגות את</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=114','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">58</a></td>
+                <td class="after">את</td>
+                <td class="after">הרכב סליפן, אדם נמוך בפרוות-כבשים, והמשרת פטרושקה, בחור כבן שלושים,</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">לבן, מרופטת קצת, מעידה שאין זה מסעה הראשון. הביאו את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=120','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">59</a></td>
+                <td class="after">את</td>
+                <td class="after">ולעזוב את העיר. אז התחלנו לעבוד יותר על הסאונד וזה</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">באמת היתה אסון", נזכרת קאן, "אחרי זה חשבנו לארוז את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=121','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">60</a></td>
+                <td class="after">את</td>
+                <td class="after">ועזב את ישראל לתמיד, בלי להביט לאחור אפילו פעם אחת.</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">בניו סאות-וויילס. אחרי מלחמת לבנון הראשונה, סיפר לנו, לקח את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=122','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">61</a></td>
+                <td class="after">את</td>
+                <td class="after">שנארזה מבעוד מועד ולעוף לטראמפ מהעיניים תכף ומיד, ללא כל</td>
+                <td class="middle">מזוודתו</td>
+                <td class="before">שעל המפוטר לקום לאלתר מכיסאו, לצאת את החדר, ליטול את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=132','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">62</a></td>
+                <td class="after">את</td>
+                <td class="after">שלך, תברח, טמבל, מה זה משנה? תציל את עצמך'".</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">שיתאימו לדירה בפלשתינה. אני רוצה לצעוק לו 'סבא, קח את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=135','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">63</a></td>
+                <td class="after">את</td>
+                <td class="after">האישית שלו בדרך לקופנהאגן וכשחזר לארץ קיבל את הבשורה המרה,</td>
+                <td class="middle">המזוודה</td>
+                <td class="before"> , איבד את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=140','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">64</a></td>
+                <td class="after">את</td>
+                <td class="after">והחפצים שלכם כאשר אינכם בחדר. המקלחות והשירותים במצב טוב, אם</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">לכל מיטה יש כלוב קטן בו אתם יכולים לנעול את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=142','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">65</a></td>
+                <td class="after">את</td>
+                <td class="after">ולהפליג אל שדה התעופה. שקיעה רכה נוחתת על העיר, צובעת</td>
+                <td class="middle">המזוודה</td>
+                <td class="before"> הגיעה העת לאסוף את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=150','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">66</a></td>
+                <td class="after">את</td>
+                <td class="after">הם חשים בו, הם מבינים שהולך לקרות משהו ומתחילים להגיב</td>
+                <td class="middle">המזוודה,</td>
+                <td class="before"> הכלבים מרגישים את השינוי. מהרגע שהתחלתם לארוז את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=152','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">67</a></td>
+                <td class="after">את</td>
+                <td class="after">בבית.</td>
+                <td class="middle">המזוודה</td>
+                <td class="before"> ג'וליה, בשדה התעופה חששו ששכחת את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=164','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">68</a></td>
+                <td class="after">את</td>
+                <td class="after">שלך - לא תעמדי במצבים מביכים", מציעה להט.</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">כך תהיי בטוחה שגם אם קצין הביטחון מחליט לבדוק את</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=175','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">69</a></td>
+                <td class="after">את</td>
+                <td class="after">. איש לא התעניין בבעיותי . חברת התעופה האוסטרית לא</td>
+                <td class="middle">מזוודתי</td>
+                <td class="before">שמעבר לכביש ( בשדה התעופה ) , שאליו גילגלתי את</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=182','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">70</a></td>
+                <td class="after">את</td>
+                <td class="after">במשך 42 שעות . אלה הן התקנות וכל ישראלי יסכים</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">) אל בור הביטחון . בבור זה יש לעכב את</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=193','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">71</a></td>
+                <td class="after">את</td>
+                <td class="after">התכשיטים , ששוויים מוערך ב - 05 אלף שקלים ,</td>
+                <td class="middle">מזוודת</td>
+                <td class="before">שהיה רעול פנים , הצמיד אקדח לרקתו , חטף את</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=232','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">72</a></td>
+                <td class="after">את</td>
+                <td class="after">זה היה סיפור של כמה שעות טובות עד שהחלפנו את</td>
+                <td class="middle">המזוודה.</td>
+                <td class="before">זה כל מה ששיניתי. כשירדנו מהטיסה גילינו שהחליפו לנו את</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=237','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">73</a></td>
+                <td class="after">את</td>
+                <td class="after">בעל המזוודה, שהגיע בינתיים ממסע הקניות שלו, לא ידע את</td>
+                <td class="middle">המזוודה.</td>
+                <td class="before"> השוטרים לא חיכו ופוצצו את</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=53','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">74</a></td>
+                <td class="after">אתם</td>
+                <td class="after">אחת בלבד במשקל 23 ק"ג - במקום שתי מזוודות כיום</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">החברה בישראל, רות בן צור, נוסעי החברה יורשו לקחת אתם</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=61','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">75</a></td>
+                <td class="after">באיתור</td>
+                <td class="after">אדומה. רון סיפר לחוקרים כי הכניס את גופתה למזוודה והשליכה</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">החלו רק יומיים אחרי שרון שיחזר את הרצח, בהתמקדות באיתור</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=214','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">76</a></td>
+                <td class="after">באריזות</td>
+                <td class="after">ובתיקי נסיעות מסקאי או מבד . מפעל " שקדיה "</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">, סוכריות ועוד . המחירים נעים בין 24521 ש"ח באריזות</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=19','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">77</a></td>
+                <td class="after">בגדים</td>
+                <td class="after">סמים מסוג קוקאין ואקסטזי. עורכי דינו של החשוד, כהן וזילברשלג,</td>
+                <td class="middle">במזוודה,</td>
+                <td class="before">לעזרה כלכלית והספקת סמים. בחיפוש שנערך בביתו, נתפסו בתוך בגדים</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=97','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">78</a></td>
+                <td class="after">בגדים</td>
+                <td class="after">ולא היה מודע לקיומו של האקדח במזוודה. האקדח נשלח לבדיקה</td>
+                <td class="middle">למזוודה</td>
+                <td class="before">חבריו האופנוענים לטיול של שלושה ימים בטורקיה, זרק כמה בגדים</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=167','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">79</a></td>
+                <td class="after">בגודל</td>
+                <td class="after">של לואי ויטון.</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">בהן היה מזוהה עם שיער סתור על פניו וישבן בגודל</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=75','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">80</a></td>
+                <td class="after">בדריכות</td>
+                <td class="after">אדומה שתימשה מן המים. בימים האחרונים משו מהם הכל כמעט</td>
+                <td class="middle">למזוודה</td>
+                <td class="before"> בצהריים, אברכים סקרנים באים לצפות במתרחש. הם מחכים בדריכות</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=155','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">81</a></td>
+                <td class="after">בה</td>
+                <td class="after">עם משקפיים רבים. בקומה מתחת נמצאות המעבדות, שם מכינים את</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">ד' ע"ש יצחק רבין בעיר והתמקמו כל אחד בעמדה, בה</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=219','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">82</a></td>
+                <td class="after">בהגעת</td>
+                <td class="after">לא היתה רוכשת אותם .</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">ובמוצרי קוסמטיקה שלא היו נחוצים לה , ואלמלא העיכוב בהגעת</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=220','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">83</a></td>
+                <td class="after">בהגעת</td>
+                <td class="after">הוא % 05 על בגדים ו%001 על תמרוקים . כאן</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">אחרות , קובעות כי שיעור ההחזר במקרה של עיכוב בהגעת</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=200','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">84</a></td>
+                <td class="after">בחכתו</td>
+                <td class="after">וגילה בתוכה חזה אדם כרות במצב ריקבון . למעשה ,</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">התגלתה שלושה חודשים מאוחר יותר , כשדייג חובב העלה בחכתו</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=108','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">85</a></td>
+                <td class="after">בירקו</td>
+                <td class="after">עם גופתה של רוז, מסיבת העיתונאים בוטלה, והנושא ירד מעל</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">סוף-סוף, להעלות 'אישו'", כדברי בירנבאום. אלא שבדיוק אז נמצאה בירקון</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=170','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">86</a></td>
+                <td class="after">בלי</td>
+                <td class="after">ואני התבאסתי כל כך, כי ידעתי שהבגדים שלי סיימו באיזה</td>
+                <td class="middle">המזוודה.</td>
+                <td class="before"> "אחרי שלושה ימים מצאו את האוטו בשטחים, בלי</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=133','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">87</a></td>
+                <td class="after">במזומ</td>
+                <td class="after"></td>
+                <td class="middle">במזוודתו</td>
+                <td class="before">כ- 10 שנים נתפס בפולין עם רבע מיליון דולר במזומן</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=156','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">88</a></td>
+                <td class="after">במחבוא</td>
+                <td class="after">חפצים אישית, ארוזה לשעת חירום. הגבר החושש תמיד לבריחתה של</td>
+                <td class="middle">מזוודת</td>
+                <td class="before">של נאמנות אבסולוטית, בעוד שבתת מודע שלה היא מחזיקה במחבוא</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=197','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">89</a></td>
+                <td class="after">במשרדה</td>
+                <td class="after">מלאה תיקים מאובקים של תביעות יהודים ממצרים , אך אינה</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">עורכת - דין תל - אביבית מחזיקה עד היום במשרדה</td>
+                <td class="citNum">Haaretz90-91</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=125','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">90</a></td>
+                <td class="after">בנעליה</td>
+                <td class="after"></td>
+                <td class="middle">ובמזוודתה.</td>
+                <td class="before">לאחר ששוטרי המכס בשדה מצאו כ-1.5 קילוגרם של הרואין בנעליה</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=238','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">91</a></td>
+                <td class="after">בעל</td>
+                <td class="after">שהגיע בינתיים ממסע הקניות שלו, לא ידע את נפשו. זו</td>
+                <td class="middle">המזוודה,</td>
+                <td class="before"> השוטרים לא חיכו ופוצצו את המזוודה. בעל</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=239','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">92</a></td>
+                <td class="after">בעל</td>
+                <td class="after">ששכח את עצמו, השומר הראשון שנקרא לטיסתו, או השומר השני</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">נפשו. זו בדיוק סוגיית שומר שמסר לשומר, מי אחראי: בעל</td>
+                <td class="citNum">Arutz7</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=107','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">93</a></td>
+                <td class="after">בעקבות</td>
+                <td class="after">האבודה שבה טמונה גופתה של רוז על פי גרסת סבה</td>
+                <td class="middle">המזוודה</td>
+                <td class="before">שעובדים בחברה מטעמה של המשטרה משקיעים אותה במי הירקון בעקבות</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">94</a></td>
+                <td class="after">בתו</td>
+                <td class="after">של אורח שהתארח אצלי בדירה, בתוך זוג גרביים. לא ידעתי</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">לא היה שלי, והמשטרה הבינה את זה. הקוק נמצא בתוך</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=55','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">95</a></td>
+                <td class="after">בתו</td>
+                <td class="after">קשיחה. שלי חודורוב, מנהלת השיווק של קבוצת למטייל, מסבירה כי</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">פופולרי למחנאות הוא הגז-נע - כירת גז ניידת המגיעה בתוך</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=86','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">96</a></td>
+                <td class="after">בתו</td>
+                <td class="after">במקום עליו הצביע בעת השחזור שביצע עם החוקרים, בנחל הירקון?</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">אחת בלבד: האם אכן השליך את גופתה של נכדתו בתוך</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=149','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">97</a></td>
+                <td class="after">בתו</td>
+                <td class="after"></td>
+                <td class="middle">מזוודה.</td>
+                <td class="before">המשתקים של החולה המסתובב במסדרונות בית החולים כשהלב שלו בתוך</td>
+                <td class="citNum">maariv</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">98</a></td>
+                <td class="after">בתוספת</td>
+                <td class="after">מלאה בקניות. הדוגמנית הבינלאומית חן יאני, אשר כיכבה כדוגמנית הבית</td>
+                <td class="middle">מזוודה</td>
+                <td class="before">ולהקת הג"ירפות הגיעו למלון עם מזוודות קטנות וחזרו הביתה בתוספת</td>
+                <td class="citNum">ereverev</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=92','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">99</a></td>
+                <td class="after">גופה</td>
+                <td class="after">למים, אחרי 3 חודשים צפוי שיישאר שלד, כמעט בלי רקמות</td>
+                <td class="middle">במזוודה</td>
+                <td class="before">יותר מגופה שנותרה באוויר החופשי", הסביר, "אבל אם תזרוק גופה</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=62','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">100</a></td>
+                <td class="after">גופתה</td>
+                <td class="after">והשליכה לנחל הירקון, והם לקחו אותו לשחזור האירוע. מתחת לגשר</td>
+                <td class="middle">למזוודה</td>
+                <td class="before">באיתור מזוודה אדומה. רון סיפר לחוקרים כי הכניס את גופתה</td>
+                <td class="citNum">haaretz</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div class="credits">site maintained by <a href="mailto:justin.parry@mail.utexas.edu">Justin Parry</a>. contact him with
+    any problems or suggestions.
+</div>
+</body>
+</html>

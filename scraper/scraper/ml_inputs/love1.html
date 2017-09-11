@@ -1,0 +1,1257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>hebrewCorpus</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <link href="styles.css" rel="stylesheet" type="text/css">
+    <link href="instructionstyles.css" rel="stylesheet" type="text/css">
+    <script language="javascript">
+        function check() {
+            var error = "false";
+            if (document.searchForm.word.value == "" && document.searchForm.wordAR.value == "") {
+                document.getElementById("searchError1").innerHTML = "search for a word";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.word.value != "" && document.searchForm.wordAR.value != "") {
+                document.getElementById("searchError1").innerHTML = "search for word in ht or arabic";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.pos.value == "---") {
+                document.getElementById("searchError1").innerHTML = "choose pos";
+                return false;
+            }
+            ;
+
+            if (document.searchForm.corpus.value == "") {
+                document.getElementById("searchError1").innerHTML = "choose corpus";
+                return false;
+            }
+            ;
+
+        };
+
+
+        var numHolder = 0;
+
+        function showIns(divId) {
+
+            if (document.getElementById(divId).style.display == "none" || document.getElementById(divId).style.display == false) {
+                //if (numHolder > 1){
+                document.getElementById(divId).style.display = "block";
+                numHolder = 0;
+            } else {
+                document.getElementById(divId).style.display = "none";
+                numHolder = 2;
+            }
+            ;
+
+        };
+
+    </script>
+
+</head>
+
+<body>
+<div>
+    <table class="topBar" cellspacing="0px">
+        <tr>
+            <td>
+                <div class="search">
+
+                    <form name="searchForm" action="search.cgi" method="POST" onSubmit="return check()">
+                        <table class="table2" cellspacing="0px">
+                            <tr>
+                                <td>latin chars &nbsp;&nbsp;<a
+                                        onClick="javascript:window.open('dt.html','window','scrollbars,resizable,dependent,width=400,height=400,left=0,top=0')">(transliteration
+                                    help)</a></td>
+                                <td>hebrew chars</td>
+                                <td>part of speech</td>
+                                <td>subcorpus</td>
+
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td rowspan="2"><input class="dt" type="TEXT" name="word"></td>
+                                <td rowspan="2"><input class="arabic" type="TEXT" name="wordAR" lang=he size=12></td>
+                                <td>
+                                    <select name="pos">
+                                        <option>---</option>
+                                        <option selected="selected">noun</option>
+                                        <option>adj</option>
+                                        <option>adv</option>
+                                        <option>verb</option>
+                                        <option>string</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select name="corpus">
+                                        <option value="">---</option>
+                                        <option value='ARUTZ'>Arutz 7: 01-06</option>
+                                        <option value='BEGINNEWS'>Beginning Newspapers</option>
+                                        <option value='EREV'>ErevErev: 03-09</option>
+                                        <option value='ARETZ'>Haaretz: 90-91</option>
+                                        <option value='ARET'>Haaretz: 08</option>
+                                        <option value='MAAR'>Maariv: 04-08</option>
+                                        <option value='RAAN'>Raanana</option>
+                                        <option value='MARKER'>TheMarker: 02</option>
+                                        <option value='YNET'>Ynet: 00-09</option>
+                                        <option value='ALLNEWS'>--All News--</option>
+                                        <option value='TANACH'>Tanach</option>
+                                        <option value='MISHNAH'>Mishnah</option>
+                                        <option value='EARLYFICT'>Early Fiction</option>
+                                        <option value='MODFICTO'>Modern Fiction-Orig: 05-10</option>
+                                        <option value='MODFICTT'>Modern Fiction-Tran: 05-10</option>
+                                        <option value='ALLLIT' selected="selected">--All Literature--</option>
+                                        <option value='MOVIES'>Movies</option>
+                                        <option value='SPOK'>Spoken</option>
+                                        <option value='TAPUZ'>Tapuz Forums</option>
+                                        <option value='ALLCOLLO'>--All Colloquial--</option>
+                                        <option value='JOURNALS'>Journals</option>
+                                        <option value='KNESSET'>Knesset: 03-05</option>
+                                        <option value='ALLSPEC'>--All Specialized--</option>
+                                        <option value='WIKIBOOKS'>Wikibooks</option>
+                                        <option value='WIKINEWS'>Wikinews</option>
+                                        <option value='WIKIPEDIA'>Wikipedia</option>
+                                        <option value='WIKIQUOTE'>Wikiquote</option>
+                                        <option value='WIKISOURCE'>Wikisource</option>
+                                        <option value='ALLWIKI'>--All Wiki Pages--</option>
+                                        <option value='ALLGENRES'>>>ALL GENRES<<</option>
+
+                                    </select>
+                                    <input type="submit" value="submit">
+                                    <div class="searchMessage" id="searchError1"></div>
+
+                                    <div class="right"><a href="searchAdvanced.php?page_type=lookup">advanced search</a>
+                                    </div>
+                                </td>
+                                <td class="instructions"><a
+                                        onClick="javascript:window.open('instructions.php','window','scrollbars,resizable,dependent,width=750,height=600,left=0,top=0')">instructions</a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <span class="vowels"><input type='text' name=userID value="1281">trywhat. </span>
+                    </form>
+
+                </div>
+            </td>
+            <td class="titlebar">
+                hebrewCorpus
+                <h2>search tool for students and scholars</h2>
+            </td>
+        </tr>
+        <tr>
+            <td class="menu" colspan="2">
+										<span class="searched_word">
+							search results for <span class="wordSearched">Ahbh</span> | <span
+                                                class="wordSearched">אהבה</span> in --All Literature--						</span>
+                <span class="menuTitle"><a href="?page=results" class="menuLink">summary</a></span>
+                <span class="menuTitle"><a href="?page=citations&sort=rBeforeW&start=1"
+                                           class="menuLink">citations</a></span>
+                <span class="menuTitle"><a href="?page=subsections" class="menuLink">subsections</a></span>
+                <span class="menuTitle"><a href="?page=wordForms" class="menuLink">word forms</a></span>
+                <span class="menuTitle"><a href="?page=wordBefAft" class="menuLink">words before/after</a></span>
+            </td>
+        </tr>
+    </table>
+
+
+</div>
+<div class="main">
+    <div class="logedIn">logged in as: Nadav</div>
+    <div class="mainResults">
+
+
+        <div class="pageTitle">citations</div>
+        <div class="pageSub">showing 1 through 100 of 6,117 &mdash; sorted by word before
+            <div class="sort"><a href="?page=citations&sort=rAfterW&start=1">sort by word after</a></div>
+            click on number at left for full citation
+        </div>
+        <div class="goTo">go to page : <span class="gray">1</span> | <a
+                href="?page=citations&sort=rBeforeW&start=2">2</a> | <a
+                href="?page=citations&sort=rBeforeW&start=3">3</a> | <a
+                href="?page=citations&sort=rBeforeW&start=4">4</a> | <a
+                href="?page=citations&sort=rBeforeW&start=5">5</a> | <a
+                href="?page=citations&sort=rBeforeW&start=6">6</a> | <a
+                href="?page=citations&sort=rBeforeW&start=7">7</a> | <a
+                href="?page=citations&sort=rBeforeW&start=8">8</a> | <a
+                href="?page=citations&sort=rBeforeW&start=9">9</a> | <a
+                href="?page=citations&sort=rBeforeW&start=10">10</a> | <a href="?page=citations&sort=rBeforeW&start=11">11</a>
+            | <a href="?page=citations&sort=rBeforeW&start=12">12</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=13">13</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=14">14</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=15">15</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=16">16</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=17">17</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=18">18</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=19">19</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=20">20</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=21">21</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=22">22</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=23">23</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=24">24</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=25">25</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=26">26</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=27">27</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=28">28</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=29">29</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=30">30</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=31">31</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=32">32</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=33">33</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=34">34</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=35">35</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=36">36</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=37">37</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=38">38</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=39">39</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=40">40</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=41">41</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=42">42</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=43">43</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=44">44</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=45">45</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=46">46</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=47">47</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=48">48</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=49">49</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=50">50</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=51">51</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=52">52</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=53">53</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=54">54</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=55">55</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=56">56</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=57">57</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=58">58</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=59">59</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=60">60</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=61">61</a> | <a
+                    href="?page=citations&sort=rBeforeW&start=62">62</a> |
+        </div>
+        <table>
+            <tr>
+                <th></th>
+                <th>sort word</th>
+                <th class="right">10 words after</th>
+                <th class="middle">word</th>
+                <th class="left">10 words before</th>
+                <th class="category"><a href="?page=citations&sort=rBeforeW&start=1&reference=TRUE">subsection (click to
+                    see reference)</a></th>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=844','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">1</a></td>
+                <td class="after"></td>
+                <td class="after">אין מועדים. הוא הולך בחדר אנה ואנה כדרכו בעת תוקף-המחשבות</td>
+                <td class="middle">לאהבה</td>
+                <td class="before"></td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=854','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">2</a></td>
+                <td class="after"></td>
+                <td class="after">נשים</td>
+                <td class="middle">אהבת</td>
+                <td class="before"></td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=923','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">3</a></td>
+                <td class="after"></td>
+                <td class="after">ומשטמה, שני היסודות הנפשיים האלה היו לבני ישראל לנחלה מאת</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=961','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">4</a></td>
+                <td class="after"></td>
+                <td class="after">גדולה אליה, איני יכול לחיות בלעדיה; אבל חבלי העבר מטפחים</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1038','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">5</a></td>
+                <td class="after"></td>
+                <td class="after">אצלו היא רק בטוי של צער, מין התרומות היא על</td>
+                <td class="middle">האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1039','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">6</a></td>
+                <td class="after"></td>
+                <td class="after">היא דבר נעים מאד, למעלה ממנה הצער. בלי צער אי-אפשר</td>
+                <td class="middle">האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1141','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">7</a></td>
+                <td class="after"></td>
+                <td class="after">אמרתי, לא היו כל סכסוכים; אך מעצורים אחדים היו בה</td>
+                <td class="middle">"באהבתנו,</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1216','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">8</a></td>
+                <td class="after"></td>
+                <td class="after">את-החכמה עוד יוסיפו להשתעשע בה. על כן בוששו ממני לבוא."</td>
+                <td class="middle">"באהבתם</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1241','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">9</a></td>
+                <td class="after"></td>
+                <td class="after"></td>
+                <td class="middle">אהבה.</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1256','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">10</a></td>
+                <td class="after"></td>
+                <td class="after">נמהרה.</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1275','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">11</a></td>
+                <td class="after"></td>
+                <td class="after">צעק הרבי בקול פחדים ויקם מכסאו וירץ בחדרו אנה ואנה.</td>
+                <td class="middle">"אהבה?!",</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1286','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">12</a></td>
+                <td class="after"></td>
+                <td class="after">וליראה אבינו שבשמים.</td>
+                <td class="middle">"לאהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1576','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">13</a></td>
+                <td class="after"></td>
+                <td class="after">את שמיכתי הכחלחלה, אהבתיה, כאהבי את הכיפה, כיפת התכלת, אשר</td>
+                <td class="middle">"אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1758','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">14</a></td>
+                <td class="after"></td>
+                <td class="after"></td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1798','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">15</a></td>
+                <td class="after"></td>
+                <td class="after">את אדוני!" - יענה העבד במתק שפתים ובחנפה רבה.</td>
+                <td class="middle">"אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1800','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">16</a></td>
+                <td class="after"></td>
+                <td class="after">את אדוני, את אשתי ואת בני!"</td>
+                <td class="middle">"אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1801','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">17</a></td>
+                <td class="after"></td>
+                <td class="after">את אדוני, את אשתי ואת בני, לא אצא חפשי!"</td>
+                <td class="middle">"אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1943','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">18</a></td>
+                <td class="after"></td>
+                <td class="after">הנאמנה היא תאמצנו להגביר על כל המכשולים הרבים המונחים על</td>
+                <td class="middle">ואהבתנו</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2022','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">19</a></td>
+                <td class="after"></td>
+                <td class="after">ציון</td>
+                <td class="middle">אהבת</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2183','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">20</a></td>
+                <td class="after"></td>
+                <td class="after">הה! תקפתני לנצח.</td>
+                <td class="middle">האהבה,</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2187','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">21</a></td>
+                <td class="after"></td>
+                <td class="after">בתענוגיה, חן ונעימות,</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2208','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">22</a></td>
+                <td class="after"></td>
+                <td class="after">והקנאה! הלא הן הראשונות לפעולות בני אדם הנוראות על כל</td>
+                <td class="middle">"האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2539','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">23</a></td>
+                <td class="after"></td>
+                <td class="after">והקנאה! הלא הן הראשונות לפעולות בני אדם, נוראות עלילה על</td>
+                <td class="middle">האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2553','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">24</a></td>
+                <td class="after"></td>
+                <td class="after">בתענוגים -</td>
+                <td class="middle">האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3043','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">25</a></td>
+                <td class="after"></td>
+                <td class="after">היא את טטינה, אהבה עוד אחרים, ומדוע כלם כה זרים</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3225','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">26</a></td>
+                <td class="after"></td>
+                <td class="after">את המורה, אוהב את הגמרא, אחזיק במלבושי כל היהודים -</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3438','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">27</a></td>
+                <td class="after"></td>
+                <td class="after">הנאמנה אשר נשקפה מעיני כל היושבים והשלוה, אשר שררה בחדר,</td>
+                <td class="middle">האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3453','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">28</a></td>
+                <td class="after"></td>
+                <td class="after">עולם אוהב את האיש הזה - קראה הנערה כמו לנפשה</td>
+                <td class="middle">אהבת</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3792','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">29</a></td>
+                <td class="after"></td>
+                <td class="after">התורה ושנאת המלאכה אשר הכו שרשיהן עמוק עמוק על תלמי</td>
+                <td class="middle">אהבת</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=3895','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">30</a></td>
+                <td class="after"></td>
+                <td class="after">נשמת היקום, הגברת הנעלה אשר בקסם שפתיה תעביר לפניה רב</td>
+                <td class="middle">האהבה!</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4092','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">31</a></td>
+                <td class="after"></td>
+                <td class="after">התלויה בדבר</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4239','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">32</a></td>
+                <td class="after"></td>
+                <td class="after">והחתונה.</td>
+                <td class="middle">האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4296','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">33</a></td>
+                <td class="after"></td>
+                <td class="after">ותאוה.</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4491','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">34</a></td>
+                <td class="after"></td>
+                <td class="after">יוסילי היה צנוע מאד. גם אחרי שנתבגר אף בגופו בגיל</td>
+                <td class="middle">אהבה?</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4539','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">35</a></td>
+                <td class="after"></td>
+                <td class="after">זו התגברה בלבו יותר ויותר. היו ימים שהשמים כאילו התכוונו</td>
+                <td class="middle">ואהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4543','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">36</a></td>
+                <td class="after"></td>
+                <td class="after">בלי פניה. כזו של הציונות.</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4552','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">37</a></td>
+                <td class="after"></td>
+                <td class="after">לטבע, לשדה, לחיים? "שניר כעדר הקצובות... כחוט השני שפתותיך... כפלח</td>
+                <td class="middle">ואהבתו</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4676','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">38</a></td>
+                <td class="after"></td>
+                <td class="after">בעד אהבה.</td>
+                <td class="middle">ואהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4694','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">39</a></td>
+                <td class="after"></td>
+                <td class="after">ריחפה בלבה מעל לכל תמונה. חסר היה, שיבוא צעיר הגון</td>
+                <td class="middle">האהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4827','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">40</a></td>
+                <td class="after"></td>
+                <td class="after">רבה אהבתיכן, פרוטותי היקרות, בחמלה גדולה ויתרה טפחתי ושמרתי אתכן,</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4959','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">41</a></td>
+                <td class="after"></td>
+                <td class="after">נטליה</td>
+                <td class="middle">באהבה,</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=4989','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">42</a></td>
+                <td class="after"></td>
+                <td class="after">ראשונה בגיל-ההתבגרות," ממלמל מרדכי בהתפעלות כשהוא עוקב אחריהם. אחר-כך נכנסו</td>
+                <td class="middle">"אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5016','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">43</a></td>
+                <td class="after"></td>
+                <td class="after">שכולם עומדים ביחד, אהבתי לשמוע את הברכה שמגיעה בשקט מכל</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5109','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">44</a></td>
+                <td class="after"></td>
+                <td class="after">בין אל ומשרתיו. משרתים שהסתובבו כשהם נכונים תמיד לקריאה בשמם.</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5125','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">45</a></td>
+                <td class="after"></td>
+                <td class="after">את דירת דודי. הייתה זו דירה מעוצבת בפשטות, דירת רווקים</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5214','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">46</a></td>
+                <td class="after"></td>
+                <td class="after">העמוקה לחתולים כמו נולדה יחד איתי כי עוד בהיותי תינוק</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5274','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">47</a></td>
+                <td class="after"></td>
+                <td class="after">את הכובעים. כובעי המצחייה או הברט, המזכירים שחקני קולנוע כמו</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5314','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">48</a></td>
+                <td class="after"></td>
+                <td class="after">חייו הקמלה של יקי נהגה לאט מאוד בדרך לשדה התעופה</td>
+                <td class="middle">אהבת</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5328','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">49</a></td>
+                <td class="after"></td>
+                <td class="after">שנאה. קנאה. ידידות. חברות קרובה. חברות רחוקה. חברות של חבורה.</td>
+                <td class="middle">אהבה.</td>
+                <td class="before"></td>
+                <td class="citNum">modernfiction-o</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5472','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">50</a></td>
+                <td class="after"></td>
+                <td class="after">נצח,</td>
+                <td class="middle">באהבת</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5500','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">51</a></td>
+                <td class="after"></td>
+                <td class="after">הפרושה על פני מרחקים מתקיימת בתנאים של הפרש שעות המשתרע</td>
+                <td class="middle">אהבתם</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5534','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">52</a></td>
+                <td class="after"></td>
+                <td class="after">היא כמו אש," אמא אומרת, "אוצר, לא צעצוע." אמא המסכנה,</td>
+                <td class="middle">"אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5612','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">53</a></td>
+                <td class="after"></td>
+                <td class="after">מאוד את האב לנדה. היינו מטיילים יחד טיולים ממושכים, מדברים</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5635','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">54</a></td>
+                <td class="after"></td>
+                <td class="after">ואושר עד בלי די! הוא כמובן הקדיש לאישה הזאת הרבה</td>
+                <td class="middle">אהבה</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5649','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">55</a></td>
+                <td class="after"></td>
+                <td class="after">את הסיפור שלי. לפעמים, בלילות, הייתי מעמידה פנים שאני ישנה</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5664','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">56</a></td>
+                <td class="after"></td>
+                <td class="after">האמיתית הייתה מכונאות. הוא היה הולך קילומטרים כדי לראות מכונה</td>
+                <td class="middle">אהבתו</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5673','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">57</a></td>
+                <td class="after"></td>
+                <td class="after">נערה, וגם היא אהבה אותי, אבל נאלצתי לעזוב אותה.</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=5793','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">58</a></td>
+                <td class="after"></td>
+                <td class="after">מהמעריצה הסודית שלך XXX</td>
+                <td class="middle">באהבה,</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=6004','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">59</a></td>
+                <td class="after"></td>
+                <td class="after">את נעלי הפלטפורמה שלך. הרבה טיפוסים כמו ההוא מסופר פליי</td>
+                <td class="middle">"אהבתי</td>
+                <td class="before"></td>
+                <td class="citNum">ModernFiction-T</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=21','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">60</a></td>
+                <td class="after"></td>
+                <td class="after">את היהודים כי עם חכם ונבון הגוי הזה, עם חרוץ</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"> - היהודים - כה אמר בלעם -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=62','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">61</a></td>
+                <td class="after"></td>
+                <td class="after">כי אראה בשחקך - אמר אליה האשכנזי יהודית-אשכנזית - מאוד</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"> -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=102','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">62</a></td>
+                <td class="after"></td>
+                <td class="after">ולא בקבורת כל נפש אחרת היתה קבורתה. היא לא מתה</td>
+                <td class="middle">אהבתם.</td>
+                <td class="before">במקום הזה נקברה נשמתם, לשד חיתם ולבתם, הלא היא -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=196','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">63</a></td>
+                <td class="after"></td>
+                <td class="after">זאת עוד הציקה לי ביתר שאת. מה מאוד חפצתי אז</td>
+                <td class="middle">ואהבתו</td>
+                <td class="before">הוא נשאני "ממש" על זרועותיו כאשר יישאו את הילד -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=287','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">64</a></td>
+                <td class="after"></td>
+                <td class="after">את עמיליא היא אהבה שוקטת ונוחה, אהבה של מנוחה ונעימות,</td>
+                <td class="middle">ואהבתו</td>
+                <td class="before">אהבה מגרת העצבים ומלהבת את הלב, אהבת אוהב חושק -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=298','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">65</a></td>
+                <td class="after"></td>
+                <td class="after">היתה אהבה חוטאת. אנכי אהבתי עלם נוצרי!</td>
+                <td class="middle">אהבתי</td>
+                <td class="before">אהבתי היתה אהבה אמולה מראשיתה! - הוסיפה עמיליא בעצב -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=398','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">66</a></td>
+                <td class="after"></td>
+                <td class="after">את הבריות, מרתי! - קרא רוזנבוים רכות בפנותו אליה -</td>
+                <td class="middle">אהבתך</td>
+                <td class="before"> -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=414','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">67</a></td>
+                <td class="after"></td>
+                <td class="after">הזאת אמולה היא בלי כל תקווה טובה.</td>
+                <td class="middle">והאהבה</td>
+                <td class="before">כמוות אהבתה אליו, כי כל מעייניה בו ביום ובלילה -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=423','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">68</a></td>
+                <td class="after"></td>
+                <td class="after">סוניה וחנופותיה. הפתייה המכוערת הזאת לא תדע עד כמה מתעב</td>
+                <td class="middle">אהבת</td>
+                <td class="before">בקירבו - המעט ממני שנאת ליזה ולעגה המר והנה -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=449','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">69</a></td>
+                <td class="after"></td>
+                <td class="after">היא תלוייה בלב, והלב איננו מבקש חשבונות, הלב הזה היה</td>
+                <td class="middle">האהבה</td>
+                <td class="before">ותום דרכו, וגם הוקירה אותו בלבה הרבה מאוד, אבל -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=468','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">70</a></td>
+                <td class="after"></td>
+                <td class="after">והחטאת לא תחדלנה אף רגע מהילחם בקירבה, יש אשר תגבר</td>
+                <td class="middle">והאהבה</td>
+                <td class="before">חטאתה לאלברט אישה האהוב לה, ואשר נפשה קשורה בנפשו. -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=475','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">71</a></td>
+                <td class="after"></td>
+                <td class="after">אישה אותה... אז יהיו חייה לתל שממה ולבית הקברות...</td>
+                <td class="middle">אהבת</td>
+                <td class="before">עוד לפליטה ונוראים יהיו חייה בהילקח מהם תמציתם ולשדם -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=505','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">72</a></td>
+                <td class="after"></td>
+                <td class="after">אותי אשר גילית לי אתמול עשתני לבריאה אחרת, לבריאה רוממה</td>
+                <td class="middle">אהבתך</td>
+                <td class="before">כקול פעמון דק וראשה צנח לרגעים על שכם האיש -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=597','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">73</a></td>
+                <td class="after"></td>
+                <td class="after">את קלרה היא אהבה לוהטת וסוערת כאחד, אהבה מגרת העצבים</td>
+                <td class="middle">אהבתו</td>
+                <td class="before">. אכן שונה האהבה הזאת מהאהבה ההיא . . .</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=611','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">74</a></td>
+                <td class="after"></td>
+                <td class="after">היתה אהבה חוטאת. אנכי אהבתי עלם נוצרי.</td>
+                <td class="middle">אהבתי</td>
+                <td class="before">אהבתי היתה אהבה אמללה מראשיתה! - הוסיפה עמיליה בעצב -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=719','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">75</a></td>
+                <td class="after"></td>
+                <td class="after">עולם בית ישראל עמך אהבת - הם-הם!"</td>
+                <td class="middle">"אהבת</td>
+                <td class="before">ונסעוד ביחד. שלמה גיטל'ס שלח היום בקבוק יין אדום -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=730','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">76</a></td>
+                <td class="after"></td>
+                <td class="after">אני...</td>
+                <td class="middle">אהבה</td>
+                <td class="before"> כי-חולת-הוי -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=741','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">77</a></td>
+                <td class="after"></td>
+                <td class="after"></td>
+                <td class="middle">והאהבה?</td>
+                <td class="before"> -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=751','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">78</a></td>
+                <td class="after"></td>
+                <td class="after">היא חפצה לאהוב את האחד מיוחד שהוא צריך לאהבתה ושהיא</td>
+                <td class="middle">באהבתם.</td>
+                <td class="before">הכל ולהאהב על-ידי הכל, שיהיו הכל מרגישים באהבתה והיא, -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=837','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">79</a></td>
+                <td class="after"></td>
+                <td class="after">אינה רק דבר-הספר בלבד, כי אם גם בלב משכנה, מגרעין</td>
+                <td class="middle">האהבה</td>
+                <td class="before">לפניו בחוץ; והוא יכול להביט בה ולהשביע נפשו בצביונה. -</td>
+                <td class="citNum">earlyfiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1048','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">80</a></td>
+                <td class="after"></td>
+                <td class="after">עמקה, בהתמכרות שאין לה גבול... צער עמק מסתמן ברשמי הפנים</td>
+                <td class="middle">באהבה</td>
+                <td class="before">הנטויות אליה בתוגה עצומה, בתוכחה שתקנית ועוד הרבה יותר -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1066','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">81</a></td>
+                <td class="after"></td>
+                <td class="after">עצמו. כן הוא, מוזר היה הדבר הזה, אך הוא הרגיש</td>
+                <td class="middle">אהבת</td>
+                <td class="before">ספירשטין: גם רגשו האסתטי היה נפגע, אך עוד יותר -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1126','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">82</a></td>
+                <td class="after"></td>
+                <td class="after">רבה לכל בני האדם.</td>
+                <td class="middle">אהבה</td>
+                <td class="before">אדיר. בשחקו היו דמעות, בבכיו - תקוה, בטחון, ובמוסרו -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1133','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">83</a></td>
+                <td class="after"></td>
+                <td class="after">רק פעם אחת, זאת היתה הפעם הראשונה וגם האחרונה בחיי,</td>
+                <td class="middle">אהבתי</td>
+                <td class="before"> "אמנם אהבתי, - החל לספר -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1168','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">84</a></td>
+                <td class="after"></td>
+                <td class="after">ל"טפה המרה" - וכדי שלא להרגיז עליה את בעלה בפגעה</td>
+                <td class="middle">מאהבתה</td>
+                <td class="before">אריה, אשה כרסתנית ומפוטמה, שפניה וחוטמה ועיניה מצהיבין תמיד -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1243','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">85</a></td>
+                <td class="after"></td>
+                <td class="after">- פני העלם האדימו כדם וכל עצמותיו חרדו לקול הרעיון</td>
+                <td class="middle">"אהבה!"</td>
+                <td class="before">בקרבו, "אסתר תאסרך אל הבית הזה בעבותות ידידות ואהבה!" -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1244','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">86</a></td>
+                <td class="after"></td>
+                <td class="after">אהה! בתור אמון על ברכי התורה הקדושה יאהב עלמה! ואיך</td>
+                <td class="middle">אהבה...?</td>
+                <td class="before">הזה אשר לא עלה עוד על לבבו הטהור מעודו -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1346','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">87</a></td>
+                <td class="after"></td>
+                <td class="after">תמצא קן לה רק בנפשות נערכות זו לעמת זו" תאמר,</td>
+                <td class="middle">"האהבה</td>
+                <td class="before">אף אבטח ולא אפחד כי תשליכני תקותי ותשלה נפשי. -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1578','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">88</a></td>
+                <td class="after"></td>
+                <td class="after">לאהבה יא-חביבתי!.. איש מאושר!..</td>
+                <td class="middle">מאהבה</td>
+                <td class="before"> -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1596','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">89</a></td>
+                <td class="after"></td>
+                <td class="after">אהבה... צדקו דברי השיר: "מה זאת אהבה?"</td>
+                <td class="middle">אהבה,</td>
+                <td class="before"> - כן, - חשבה אהודה -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1900','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">90</a></td>
+                <td class="after"></td>
+                <td class="after">לרעך כמוך", ויוסף הולך אל דמיטרי ומוסר לו את הידיעה</td>
+                <td class="middle">ואהבת</td>
+                <td class="before"> משה מבאר לבנו, כי יסוד תורתנו הוא העיקר -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1903','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">91</a></td>
+                <td class="after"></td>
+                <td class="after">ציון" ו"אשמת שומרון"... הוא חולל מהפכה בהלך מחשבותיו ובאידיאלינו... המשכילים</td>
+                <td class="middle">"אהבת</td>
+                <td class="before">הן מאפו הוא שכתב לנו עברית את הציורים הנפלאים -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1939','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">92</a></td>
+                <td class="after"></td>
+                <td class="after">אלי... אבל ספר נא, רופא יקר, מכל המצוקות והענויים, אשר</td>
+                <td class="middle">באהבתו</td>
+                <td class="before">הראה באצבעה על אלוף נעוריה - והוא נחם אותי -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1955','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">93</a></td>
+                <td class="after"></td>
+                <td class="after">לרעך כמוך, כי ימוך אחיך עזר תעזר לו, משפט אחד</td>
+                <td class="middle">ואהבת</td>
+                <td class="before"> - גברתי לא תדע כי הפרינציפים -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1983','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">94</a></td>
+                <td class="after"></td>
+                <td class="after">איש נעלה ויקר כזה.?</td>
+                <td class="middle">באהבת</td>
+                <td class="before">טמון לאחותן היקרה - אשר הקדישה להן את כחותיה -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=1992','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">95</a></td>
+                <td class="after"></td>
+                <td class="after">אלי מעורת את עיניך, אחותי, - אמרה שרה בהתאדמה.</td>
+                <td class="middle">אהבתך</td>
+                <td class="before"> -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2295','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">96</a></td>
+                <td class="after"></td>
+                <td class="after">ולבניה - עוז ותעצומות'.</td>
+                <td class="middle">אהבה,</td>
+                <td class="before">לעשות לה' - כי אם לארצך תן כבוד, לירושלים -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2591','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">97</a></td>
+                <td class="after"></td>
+                <td class="after">עלינו, יהודים! אהבת נשים, במחילת כבודך. חרפה להעלות כזאת על</td>
+                <td class="middle">אהבה</td>
+                <td class="before">אוהב! ואת מי? את דינה!... ראי, זה דבר חדש -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2649','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">98</a></td>
+                <td class="after"></td>
+                <td class="after">המשמחת את האדם ומלבשתו ענוה ומכשרתו להיות ישר ונאמן, אוהב</td>
+                <td class="middle">אהבה</td>
+                <td class="before">דמות הגוף, אהבה מסותרת אל הטוב, אל היופי והנשגב -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2719','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">99</a></td>
+                <td class="after"></td>
+                <td class="after">לאומית נפרזה רעה חולה היא, כאהבת עצמו של אדם פרטי;</td>
+                <td class="middle">אהבה</td>
+                <td class="before"> -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+            <tr>
+                <td class="citNum"><a
+                        onClick="javascript:window.open('findCit.php?ref=2736','window','scrollbars,resizable,dependent,width=700,height=600,left=0,top=0')"
+                        class="citNum">100</a></td>
+                <td class="after"></td>
+                <td class="after">וברצון - אמרו שניהם - מי יהודי שמשתמט מאורח בשבת?</td>
+                <td class="middle">באהבה</td>
+                <td class="before"> -</td>
+                <td class="citNum">EarlyFiction</td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+<div class="credits">site maintained by <a href="mailto:justin.parry@mail.utexas.edu">Justin Parry</a>. contact him with
+    any problems or suggestions.
+</div>
+</body>
+</html>
